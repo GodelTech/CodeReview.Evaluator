@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
-using ReviewItEasy.Evaluator.Services;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Services;
 
-namespace ReviewItEasy.Evaluator.Commands
+namespace GodelTech.CodeReview.Evaluator.Commands
 {
     public class CreateNewManifestCommand : ICreateNewManifestCommand
     {

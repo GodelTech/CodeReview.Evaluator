@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IIssueService
     {

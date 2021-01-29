@@ -1,4 +1,4 @@
-﻿namespace ReviewItEasy.Evaluator.Services
+﻿namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IPathService
     {

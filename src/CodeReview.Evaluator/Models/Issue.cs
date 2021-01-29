@@ -1,4 +1,4 @@
-﻿namespace ReviewItEasy.Evaluator.Models
+﻿namespace GodelTech.CodeReview.Evaluator.Models
 {
     public class Issue
     {

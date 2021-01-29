@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ReviewItEasy.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Commands
+namespace GodelTech.CodeReview.Evaluator.Commands
 {
     public interface IEvaluateCommand
     {

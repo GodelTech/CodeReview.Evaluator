@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using GodelTech.CodeReview.Evaluator.Models;
 using Microsoft.Data.Sqlite;
-using ReviewItEasy.Evaluator.Models;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class DatabaseService : IDatabaseService
     {

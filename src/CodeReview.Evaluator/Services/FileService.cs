@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class FileService : IFileService
     {

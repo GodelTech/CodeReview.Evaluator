@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ReviewItEasy.Evaluator.Models
+namespace GodelTech.CodeReview.Evaluator.Models
 {
     public class FilterManifest
     {

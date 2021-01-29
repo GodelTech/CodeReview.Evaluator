@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class EvaluationResult
     {

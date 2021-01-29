@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace ReviewItEasy.Evaluator.Options
+namespace GodelTech.CodeReview.Evaluator.Options
 {
     [Verb("new-manifest", HelpText = "Creates new manifest which can be used as draft manifest.")]
     public class NewManifestOptions

@@ -1,7 +1,7 @@
 ﻿using System;
-using ReviewItEasy.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Models;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class GenericIssueFilter<T> : IIssueFilter
     {

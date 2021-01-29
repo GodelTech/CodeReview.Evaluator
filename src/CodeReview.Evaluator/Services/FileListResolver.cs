@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using ReviewItEasy.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class FileListResolver : IFileListResolver
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using CommandLine;
 
-namespace ReviewItEasy.Evaluator.Options
+namespace GodelTech.CodeReview.Evaluator.Options
 {
     public abstract class IssueProcessingOptionsBase
     {

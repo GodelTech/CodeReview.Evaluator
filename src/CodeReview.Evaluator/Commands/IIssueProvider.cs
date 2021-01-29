@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Commands
+namespace GodelTech.CodeReview.Evaluator.Commands
 {
     public interface IIssueProvider
     {

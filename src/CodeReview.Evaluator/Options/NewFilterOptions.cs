@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace ReviewItEasy.Evaluator.Options
+namespace GodelTech.CodeReview.Evaluator.Options
 {
     [Verb("new-filter", HelpText = "Creates new filter which can be used as draft for real filter.")]
     public class NewFilterOptions

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using GodelTech.CodeReview.Evaluator.Models;
 using Microsoft.Extensions.Logging;
-using ReviewItEasy.Evaluator.Models;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class ScopeManifestValidator : IScopeManifestValidator
     {

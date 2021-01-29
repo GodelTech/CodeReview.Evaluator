@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Services;
 using Microsoft.Extensions.Logging;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
-using ReviewItEasy.Evaluator.Services;
 
-namespace ReviewItEasy.Evaluator.Commands
+namespace GodelTech.CodeReview.Evaluator.Commands
 {
     public class EvaluateCommand : IEvaluateCommand
     {

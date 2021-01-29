@@ -4,7 +4,7 @@ using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
-namespace ReviewItEasy.Evaluator.Models
+namespace GodelTech.CodeReview.Evaluator.Models
 {
     // The purpose of this class avoiding infinite deserialization loop
     public class ParameterManifestBase

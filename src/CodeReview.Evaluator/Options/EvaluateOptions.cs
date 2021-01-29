@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace ReviewItEasy.Evaluator.Options
+namespace GodelTech.CodeReview.Evaluator.Options
 {
     [Verb("evaluate", HelpText = "Create issue summary using provided manifest.")]
     public class EvaluateOptions : IssueProcessingOptionsBase

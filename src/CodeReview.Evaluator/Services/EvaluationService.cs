@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReviewItEasy.Evaluator.Exceptions;
-using ReviewItEasy.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Exceptions;
+using GodelTech.CodeReview.Evaluator.Models;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class EvaluationService : IEvaluationService
     {

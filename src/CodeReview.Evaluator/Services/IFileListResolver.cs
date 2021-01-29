@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ReviewItEasy.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IFileListResolver
     {

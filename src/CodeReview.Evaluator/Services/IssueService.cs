@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using GodelTech.CodeReview.Evaluator.Commands;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
 using Microsoft.Extensions.Logging;
-using ReviewItEasy.Evaluator.Commands;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class IssueService : IIssueService
     {

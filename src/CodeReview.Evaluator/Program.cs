@@ -3,15 +3,15 @@ using System.IO;
 using System.Threading.Tasks;
 using CommandLine;
 using CommandLine.Text;
+using GodelTech.CodeReview.Evaluator.Commands;
+using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
+using GodelTech.CodeReview.Evaluator.Services;
+using GodelTech.CodeReview.Evaluator.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ReviewItEasy.Evaluator.Commands;
-using ReviewItEasy.Evaluator.Models;
-using ReviewItEasy.Evaluator.Options;
-using ReviewItEasy.Evaluator.Services;
-using ReviewItEasy.Evaluator.Utils;
 
-namespace ReviewItEasy.Evaluator
+namespace GodelTech.CodeReview.Evaluator
 {
     // 1. Add manifest and filter validators
     class Program

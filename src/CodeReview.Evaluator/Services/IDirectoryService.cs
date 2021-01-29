@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ReviewItEasy.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IDirectoryService
     {

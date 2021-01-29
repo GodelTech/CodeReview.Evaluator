@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReviewItEasy.Evaluator.Exceptions
+namespace GodelTech.CodeReview.Evaluator.Exceptions
 {
     public class QueryExecutionException : Exception
     {
