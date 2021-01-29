@@ -1,0 +1,4 @@
+exclude:
+  filePath:
+  - pattern: src/.*
+    isRegex: true

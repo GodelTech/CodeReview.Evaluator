@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ReviewItEasy.Evaluator": {
+      "commandName": "Project",
+      "commandLineArgs": "evaluate -o result.json -m d:\\_Projects\\ReviewItEasy.Evaluator\\docs\\maifests\\manifest.yaml -f d:\\_Projects\\ReviewItEasy.Orchestrator\\src\\ReviewItEasy.Orchestrator\\bin\\Debug\\net5.0\\artifacts\\resharper-result.zip -s d:\\_Projects\\ReviewItEasy.Evaluator\\docs\\maifests\\filter.yaml"
+    }
+  }
+}
