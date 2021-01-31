@@ -12,7 +12,6 @@ FROM mcr.microsoft.com/dotnet/runtime:5.0 AS runtime
 RUN apt-get update
 RUN apt-get --yes install nuget
 
-VOLUME /app/Dictionaries
 WORKDIR /app
 COPY --from=build /app/CodeReview.Evaluator/out .
 ENTRYPOINT ["dotnet", "CodeReview.Evaluator.dll"]
