@@ -48,3 +48,10 @@ header :
   code: 7705
   language: JSON
 ```
+
+Installing `cloc` for Ubunitu: [instructions](https://zoomadmin.com/HowToInstall/UbuntuPackage/cloc). The following commands must be used:
+
+```bash
+sudo apt-get update -y
+sudo apt-get install -y cloc
+```
