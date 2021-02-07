@@ -6,7 +6,7 @@
     },
     "ReviewItEasy.Evaluator - Evaluate": {
       "commandName": "Project",
-      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/maifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
     }
   }
 }

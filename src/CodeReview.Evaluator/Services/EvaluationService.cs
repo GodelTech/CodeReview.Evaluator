@@ -49,7 +49,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
         private async Task<object> ExecuteRequestAsync(EvaluationManifest manifest, string dbFilePath,
             DbRequestManifest dbRequestManifest)
         {
-            switch (dbRequestManifest.RequestType)
+            switch (dbRequestManifest.Type)
             {
                 case RequestType.Scalar:
                     return await _databaseService.ExecuteScalarAsync(dbFilePath,
@@ -68,7 +68,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                         dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
                     return null;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(dbRequestManifest.RequestType));
+                    throw new ArgumentOutOfRangeException(nameof(dbRequestManifest.Type));
             }
         }
 

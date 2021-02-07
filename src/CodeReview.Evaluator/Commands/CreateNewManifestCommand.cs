@@ -40,7 +40,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["inlineQuery"] = new()
                     {
                         Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
-                        RequestType = RequestType.Scalar,
+                        Type = RequestType.Scalar,
                         StatusRanges = new()
                         {
                             ["red"] = new StatusRange {  Start = null, End = 100 },
@@ -61,7 +61,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query2",
-                        RequestType = RequestType.Object,
+                        Type = RequestType.Object,
                         StatusRanges = new()
                         {
                             ["red"] = new StatusRange { Start = null, End = 100 },
@@ -82,7 +82,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["inlineQuery"] = new()
                     {
                         Query = "SELECT TOP 1 * FROM Issues WHERE IssueId = @IssueId",
-                        RequestType = RequestType.Collection,
+                        Type = RequestType.Collection,
                         Parameters = new ()
                         {
                             ["IssueId"] = new ParameterManifest
@@ -97,7 +97,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query1",
-                        RequestType = RequestType.NoResult,
+                        Type = RequestType.NoResult,
                         Parameters = new()
                         {
                             ["RuleId"] = new ParameterManifest

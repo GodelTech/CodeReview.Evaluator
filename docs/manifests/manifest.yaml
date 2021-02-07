@@ -1,17 +1,19 @@
 queries:
   issueByCategory:
     query: SELECT * FROM Issues WHERE Category = $Category
-scalars:
+requests:
   totalIssueCount:
     query: SELECT COUNT(*) FROM Issues
+    type: Scalar
   redundanciesInCode:
     queryRef: issueByCategory
+    type: Collection
     parameters:
       Category: Redundancies in Code
-objects:
   topIssue:
     query: SELECT * FROM Issues LIMIT (1)
-collections:
+    type: Object
   issueCountByCategory:
     query: SELECT Category, COUNT(*) AS IssueCount FROM Issues GROUP BY Category
+    type: Collection
 
