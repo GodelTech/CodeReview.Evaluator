@@ -13,7 +13,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (manifest == null) 
                 throw new ArgumentNullException(nameof(manifest));
 
-
             return new CompositeIssueFilter(
                 false,
                 CreateFilterFromManifest(true, manifest.Include),
