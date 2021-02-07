@@ -27,6 +27,29 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript());
         }
 
+        public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)
+        {
+            if (items == null) 
+                throw new ArgumentNullException(nameof(items));
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            await using var connection = new SqliteConnection(BuildConnectionString(dbFilePath));
+
+            await connection.OpenAsync();
+
+            // This action is required to speed up insert operation
+            // https://stackoverflow.com/questions/3852068/sqlite-insert-very-slow
+            await BeginTransactionAsync(connection);
+
+            foreach (var item in items)
+            {
+                await SaveLocItemAsync(connection, item);
+            }
+
+            await CommitTransactionAsync(connection);
+        }
+
         public async Task ExecuteNonQueryAsync(string dbFilePath, string sql)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
@@ -208,6 +231,35 @@ namespace GodelTech.CodeReview.Evaluator.Services
             {
                 await SaveTagAsync(connection, issue.Id, tag);
             }
+        }
+
+        private static async Task SaveLocItemAsync(SqliteConnection connection, FileLocDetails details)
+        {
+            var issueCommand = connection.CreateCommand();
+
+            issueCommand.CommandText = @"INSERT INTO FileDetails 
+            (
+	            FilePath,
+	            Language,
+	            Blank,
+	            Code,
+	            Commented
+            )
+            VALUES (
+                $filePath,
+                $language,
+                $blank,
+                $code,
+                $commented
+            );";
+
+            issueCommand.Parameters.AddWithValue("$filePath", details.FilePath);
+            issueCommand.Parameters.AddWithValue("$language", details.Language ?? string.Empty);
+            issueCommand.Parameters.AddWithValue("$blank", details.Blank);
+            issueCommand.Parameters.AddWithValue("$code", details.Code);
+            issueCommand.Parameters.AddWithValue("$commented", details.Commented);
+
+            await issueCommand.ExecuteNonQueryAsync();
         }
 
         private static async Task SaveIssueAsync(SqliteConnection connection, Issue issue)

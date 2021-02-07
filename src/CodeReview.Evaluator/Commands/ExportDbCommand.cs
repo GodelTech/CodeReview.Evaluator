@@ -12,17 +12,20 @@ namespace GodelTech.CodeReview.Evaluator.Commands
         private readonly IDatabaseService _databaseService;
         private readonly IFileService _fileService;
         private readonly IIssueService _issueService;
+        private readonly IFileLocDetailsProvider _locDetailsProvider;
         private readonly ILogger<ExportDbCommand> _logger;
 
         public ExportDbCommand(
             IDatabaseService databaseService,
             IFileService fileService,
             IIssueService issueService,
+            IFileLocDetailsProvider locDetailsProvider,
             ILogger<ExportDbCommand> logger)
         {
             _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _issueService = issueService ?? throw new ArgumentNullException(nameof(issueService));
+            _locDetailsProvider = locDetailsProvider ?? throw new ArgumentNullException(nameof(locDetailsProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         
@@ -39,6 +42,13 @@ namespace GodelTech.CodeReview.Evaluator.Commands
             await _databaseService.CreateDbAsync(options.OutputPath);
 
             _logger.LogInformation("Database created");
+            
+            _logger.LogInformation("Loading file LOC statistics...");
+
+            var details = await _locDetailsProvider.GetDetailsAsync(options);
+            await _databaseService.SaveLocDetailsAsync(options.OutputPath, details);
+            
+            _logger.LogInformation("LOC statistics loaded");
 
             _logger.LogInformation("Persisting issues...");
 

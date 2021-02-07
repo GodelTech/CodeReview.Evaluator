@@ -1,0 +1,938 @@
+{
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap.css": {
+    "language": "CSS",
+    "blank": 1199,
+    "code": 8832,
+    "commented": 7
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/project.assets.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 7705,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery/dist/jquery.js": {
+    "language": "JavaScript",
+    "blank": 1950,
+    "code": 6690,
+    "commented": 1724
+  },
+  "test/GodelTech.Microservices.Core.Tests/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Core.Tests.deps.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 6003,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/project.assets.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 5596,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/bin/Debug/netcoreapp3.1/GodelTech.Microservices.IntegrationTests.deps.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 5362,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js": {
+    "language": "JavaScript",
+    "blank": 1161,
+    "code": 4493,
+    "commented": 1359
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Website.deps.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 3858,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Core.deps.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 3842,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css": {
+    "language": "CSS",
+    "blank": 201,
+    "code": 3511,
+    "commented": 7
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/js/bootstrap.js": {
+    "language": "JavaScript",
+    "blank": 841,
+    "code": 3262,
+    "commented": 332
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation/dist/jquery.validate.js": {
+    "language": "JavaScript",
+    "blank": 234,
+    "code": 1184,
+    "commented": 183
+  },
+  "test/GodelTech.Microservices.Website/obj/project.assets.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 1013,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/obj/project.assets.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 998,
+    "commented": 0
+  },
+  ".vs/GodelTech.Microservices.Core/config/applicationhost.config": {
+    "language": "XML",
+    "blank": 16,
+    "code": 936,
+    "commented": 45
+  },
+  "stat.yaml": {
+    "language": "YAML",
+    "blank": 0,
+    "code": 729,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation/dist/additional-methods.js": {
+    "language": "JavaScript",
+    "blank": 136,
+    "code": 629,
+    "commented": 393
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js": {
+    "language": "JavaScript",
+    "blank": 53,
+    "code": 306,
+    "commented": 73
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 5,
+    "code": 301,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Shared/_Layout.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 5,
+    "code": 292,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css": {
+    "language": "CSS",
+    "blank": 56,
+    "code": 267,
+    "commented": 8
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/contentModel.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 236,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/GodelTech.Microservices.IntegrationTests.csproj.nuget.dgspec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 217,
+    "commented": 0
+  },
+  "readmE.md": {
+    "language": "Markdown",
+    "blank": 53,
+    "code": 186,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Middlewares/RequestResponseLoggingMiddleware.cs": {
+    "language": "C#",
+    "blank": 31,
+    "code": 169,
+    "commented": 6
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/GodelTech.Microservices.Core.Tests.csproj.nuget.dgspec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 164,
+    "commented": 0
+  },
+  "report.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 162,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/GodelTech.Microservices.Website.csproj.nuget.dgspec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 132,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/workspace.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 121,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Shared/_ValidationScriptsPartial.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 92,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 92,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/project.packagespec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 86,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Error.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 6,
+    "code": 83,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 6,
+    "code": 81,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/project.packagespec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 80,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/obj/GodelTech.Microservices.Core.csproj.nuget.dgspec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 73,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/HealthChecks/HealthCheckInitializer.cs": {
+    "language": "C#",
+    "blank": 11,
+    "code": 69,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/Services/CorrelationIdAccessorTests.cs": {
+    "language": "C#",
+    "blank": 19,
+    "code": 67,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Middlewares/LogUncaughtErrorsMiddleware.cs": {
+    "language": "C#",
+    "blank": 5,
+    "code": 60,
+    "commented": 2
+  },
+  "src/GodelTech.Microservices.Core/obj/project.packagespec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 60,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/ApiInitializer.cs": {
+    "language": "C#",
+    "blank": 10,
+    "code": 57,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Privacy.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 57,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 55,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/project.packagespec.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 54,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Mvc/MvcInitializerTests.cs": {
+    "language": "C#",
+    "blank": 14,
+    "code": 53,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/css/site.css": {
+    "language": "CSS",
+    "blank": 10,
+    "code": 53,
+    "commented": 8
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/Index.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 50,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 48,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/Pages/Shared/_Layout.cshtml": {
+    "language": "Razor",
+    "blank": 3,
+    "code": 47,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Views/Shared/_Layout.cshtml": {
+    "language": "Razor",
+    "blank": 1,
+    "code": 47,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/_ViewStart.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 47,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 47,
+    "commented": 1
+  },
+  "src/GodelTech.Microservices.Core/Mvc/MvcInitializer.cs": {
+    "language": "C#",
+    "blank": 9,
+    "code": 43,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Mvc/ApiInitializerTests.cs": {
+    "language": "C#",
+    "blank": 9,
+    "code": 40,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Mvc/RazorPagesInitializerTests.cs": {
+    "language": "C#",
+    "blank": 9,
+    "code": 40,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Pages/_ViewImports.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 40,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 40,
+    "commented": 1
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Filters/HttpStatusCodeOnExceptionAttribute.cs": {
+    "language": "C#",
+    "blank": 8,
+    "code": 39,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/RazorPagesInitializer.cs": {
+    "language": "C#",
+    "blank": 8,
+    "code": 39,
+    "commented": 3
+  },
+  "src/GodelTech.Microservices.Core/MicroserviceStartup.cs": {
+    "language": "C#",
+    "blank": 8,
+    "code": 37,
+    "commented": 2
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Middlewares/CorrelationIdMiddleware.cs": {
+    "language": "C#",
+    "blank": 7,
+    "code": 36,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/DeveloperExceptionPageInitializer.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 32,
+    "commented": 4
+  },
+  ".github/ISSUE_TEMPLATE/BUG_REPORT.md": {
+    "language": "Markdown",
+    "blank": 11,
+    "code": 30,
+    "commented": 0
+  },
+  ".github/ISSUE_TEMPLATE/FEATURE_REQUEST.md": {
+    "language": "Markdown",
+    "blank": 9,
+    "code": 30,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Controllers/HomeController.cs": {
+    "language": "C#",
+    "blank": 5,
+    "code": 28,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/GenericInitializer.cs": {
+    "language": "C#",
+    "blank": 6,
+    "code": 27,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/GodelTech.Microservices.Core.Tests.csproj.nuget.g.props": {
+    "language": "XML",
+    "blank": 0,
+    "code": 27,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/bin/Debug/netcoreapp3.1/Properties/launchSettings.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 27,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/GodelTech.Microservices.IntegrationTests.csproj.nuget.g.props": {
+    "language": "XML",
+    "blank": 0,
+    "code": 27,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/Properties/launchSettings.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 27,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/GodelTech.Microservices.Core.csproj": {
+    "language": "MSBuild script",
+    "blank": 7,
+    "code": 26,
+    "commented": 4
+  },
+  "src/GodelTech.Microservices.Core/Utils/InMemoryDictionaryExtensions.cs": {
+    "language": "C#",
+    "blank": 6,
+    "code": 26,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/Error.cshtml.cs": {
+    "language": "C#",
+    "blank": 5,
+    "code": 26,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/CommonMiddlewareInitializer.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 25,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/HttpsInitializer.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 25,
+    "commented": 1
+  },
+  "src/GodelTech.Microservices.Core/Services/CorrelationIdAccessor.cs": {
+    "language": "C#",
+    "blank": 8,
+    "code": 25,
+    "commented": 3
+  },
+  "test/GodelTech.Microservices.Website/Startup.cs": {
+    "language": "C#",
+    "blank": 6,
+    "code": 25,
+    "commented": 5
+  },
+  "azure-pipelines.yml": {
+    "language": "YAML",
+    "blank": 3,
+    "code": 23,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Exceptions/FileTooLargeExceptionException.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 23,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/GodelTech.Microservices.Core.Tests.csproj": {
+    "language": "MSBuild script",
+    "blank": 6,
+    "code": 23,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/Pages/Error.cshtml": {
+    "language": "Razor",
+    "blank": 3,
+    "code": 23,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/MicroserviceInitializerBase.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 22,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/GodelTech.Microservices.IntegrationTests.csproj": {
+    "language": "MSBuild script",
+    "blank": 7,
+    "code": 22,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Views/Shared/Error.cshtml": {
+    "language": "Razor",
+    "blank": 3,
+    "code": 22,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/Index.cshtml.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 21,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/Privacy.cshtml.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 21,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Utils/IntegrationTestWebApplicationFactory.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 20,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/IntegrationTestBase.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 19,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/IntegrationTestsStartup.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 19,
+    "commented": 6
+  },
+  "src/GodelTech.Microservices.Core/Services/CommonServicesInitializer.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 18,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Program.cs": {
+    "language": "C#",
+    "blank": 2,
+    "code": 18,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/GodelTech.Microservices.Website.csproj.nuget.g.props": {
+    "language": "XML",
+    "blank": 0,
+    "code": 18,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation/LICENSE.md": {
+    "language": "Markdown",
+    "blank": 4,
+    "code": 18,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/riderModule.iml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 16,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Services/DisposableAction.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 16,
+    "commented": 8
+  },
+  "src/GodelTech.Microservices.Core/Exceptions/RequestValidationException.cs": {
+    "language": "C#",
+    "blank": 3,
+    "code": 15,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Utils/HttpResponseMessageExtensions.cs": {
+    "language": "C#",
+    "blank": 2,
+    "code": 14,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/GodelTech.Microservices.IntegrationTests.csproj.nuget.g.targets": {
+    "language": "XML",
+    "blank": 0,
+    "code": 14,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/v1/Controllers/UserController.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 14,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/GodelTech.Microservices.Core.Tests.csproj.nuget.g.targets": {
+    "language": "XML",
+    "blank": 0,
+    "code": 13,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/Debug/netcoreapp3.1/GodelTech.Microservices.IntegrationTests.AssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 13,
+    "commented": 9
+  },
+  ".github/PULL_REQUEST_TEMPLATE.md": {
+    "language": "Markdown",
+    "blank": 2,
+    "code": 12,
+    "commented": 0
+  },
+  "codeCoverage.runsettings": {
+    "language": "XML",
+    "blank": 0,
+    "code": 12,
+    "commented": 1
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Filters/BadRequestOnExceptionAttribute.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 12,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Mvc/Filters/NotFoundOnExceptionAttribute.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 12,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/GodelTech.Microservices.Website.csproj": {
+    "language": "MSBuild script",
+    "blank": 4,
+    "code": 12,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Website.runtimeconfig.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 12,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Exceptions/ResourceNotFoundException.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 11,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/IMicroserviceInitializer.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 11,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Website.RazorTargetAssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 11,
+    "commented": 10
+  },
+  "src/GodelTech.Microservices.Core/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Core.AssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 10,
+    "commented": 10
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/appsettings.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 10,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/modules.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 9,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Core.Tests.runtimeconfig.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 9,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Core.Tests/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Core.Tests.AssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 9,
+    "commented": 10
+  },
+  "test/GodelTech.Microservices.Website/GodelTech.Microservices.Website.csproj.user": {
+    "language": "XML",
+    "blank": 0,
+    "code": 9,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/Index.cshtml": {
+    "language": "Razor",
+    "blank": 1,
+    "code": 9,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/appsettings.Development.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 9,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Website.AssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 9,
+    "commented": 10
+  },
+  "test/GodelTech.Microservices.Website/obj/GodelTech.Microservices.Website.csproj.nuget.g.targets": {
+    "language": "XML",
+    "blank": 0,
+    "code": 9,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/.idea.GodelTech.Microservices.Core.iml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 8,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/indexLayout.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 8,
+    "commented": 0
+  },
+  "src/GodelTech.Microservices.Core/Services/ICorrelationIdSetter.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 8,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Models/ErrorViewModel.cs": {
+    "language": "C#",
+    "blank": 1,
+    "code": 8,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/bin/Debug/netcoreapp3.1/GodelTech.Microservices.Website.runtimeconfig.dev.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 8,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/Privacy.cshtml": {
+    "language": "Razor",
+    "blank": 1,
+    "code": 7,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Views/Home/Index.cshtml": {
+    "language": "Razor",
+    "blank": 1,
+    "code": 7,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/misc.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 6,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/projectSettingsUpdater.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 6,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/vcs.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 6,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/GodelTech.Microservices.IntegrationTests.csproj.user": {
+    "language": "XML",
+    "blank": 0,
+    "code": 6,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Website.RazorAssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 6,
+    "commented": 10
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/Debug/netcoreapp3.1/GodelTech.Microservices.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 5,
+    "commented": 9
+  },
+  "test/GodelTech.Microservices.Website/Views/Home/Privacy.cshtml": {
+    "language": "Razor",
+    "blank": 1,
+    "code": 5,
+    "commented": 0
+  },
+  ".idea/.idea.GodelTech.Microservices.Core/.idea/encodings.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 4,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/GodelTech.Microservices.Website.MvcApplicationPartsAssemblyInfo.cs": {
+    "language": "C#",
+    "blank": 4,
+    "code": 4,
+    "commented": 9
+  },
+  "test/GodelTech.Microservices.IntegrationTests/obj/Debug/netcoreapp3.1/staticwebassets/GodelTech.Microservices.IntegrationTests.StaticWebAssets.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 3,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.IntegrationTests/xunit.runner.json": {
+    "language": "JSON",
+    "blank": 0,
+    "code": 3,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Pages/_ViewImports.cshtml": {
+    "language": "Razor",
+    "blank": 0,
+    "code": 3,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Views/_ViewStart.cshtml": {
+    "language": "Razor",
+    "blank": 0,
+    "code": 3,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs": {
+    "language": "C#",
+    "blank": 0,
+    "code": 3,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.IntegrationTests/Config.cs": {
+    "language": "C#",
+    "blank": 2,
+    "code": 2,
+    "commented": 3
+  },
+  "test/GodelTech.Microservices.Website/Views/Shared/_ValidationScriptsPartial.cshtml": {
+    "language": "Razor",
+    "blank": 0,
+    "code": 2,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/Views/_ViewImports.cshtml": {
+    "language": "Razor",
+    "blank": 0,
+    "code": 2,
+    "commented": 0
+  },
+  ".github/ISSUE_TEMPLATE/config.yaml": {
+    "language": "YAML",
+    "blank": 0,
+    "code": 1,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/obj/Debug/netcoreapp3.1/staticwebassets/GodelTech.Microservices.Website.StaticWebAssets.xml": {
+    "language": "XML",
+    "blank": 0,
+    "code": 1,
+    "commented": 0
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css": {
+    "language": "CSS",
+    "blank": 0,
+    "code": 1,
+    "commented": 6
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css": {
+    "language": "CSS",
+    "blank": 0,
+    "code": 1,
+    "commented": 7
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css": {
+    "language": "CSS",
+    "blank": 0,
+    "code": 1,
+    "commented": 6
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 6
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 6
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 4
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation/dist/additional-methods.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 3
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 3
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/lib/jquery/dist/jquery.min.js": {
+    "language": "JavaScript",
+    "blank": 0,
+    "code": 1,
+    "commented": 1
+  },
+  "test/GodelTech.Microservices.Website/wwwroot/js/site.js": {
+    "language": "JavaScript",
+    "blank": 1,
+    "code": 0,
+    "commented": 3
+  }
+}

@@ -5,6 +5,9 @@ namespace GodelTech.CodeReview.Evaluator.Options
 {
     public abstract class IssueProcessingOptionsBase
     {
+        [Option('l', "loc", Required = false, HelpText = "Lines of code statistics")]
+        public string LocFilePath { get; set; }
+        
         [Option('f', "folder", Required = true, HelpText = "Path to folder or file to process")]
         public string Path { get; set; }
 
