@@ -83,17 +83,6 @@ namespace GodelTech.CodeReview.Evaluator.Commands
 
             _logger.LogInformation("Issues persisted");
 
-            foreach (var scriptFile in options.InitScripts ?? Array.Empty<string>())
-            {
-                _logger.LogInformation("Running init script. File = {filePath}", scriptFile);
-
-                var content = await _fileService.ReadAllTextAsync(scriptFile);
-
-                await _databaseService.ExecuteNonQueryAsync(file.FilePath, content);
-
-                _logger.LogInformation("Init script executed");
-            }
-            
             _logger.LogInformation("Running queries from manifest...");
 
             await _evaluationService.EvaluateAsync(

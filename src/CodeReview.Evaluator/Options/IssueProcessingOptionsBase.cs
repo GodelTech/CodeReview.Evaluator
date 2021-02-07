@@ -17,9 +17,6 @@ namespace GodelTech.CodeReview.Evaluator.Options
         [Option('r', "recurse", Default = true, Required = false, HelpText = "Specifies if recurse search must be used for for files in folder")]
         public bool RecurseSearch { get; set; }
 
-        [Option('i', "init", Required = false, Separator = ';', HelpText = "Init scripts to execute")]
-        public IEnumerable<string> InitScripts { get; set; }
-
         [Option('s', "scope", Required = false, HelpText = "Scope of issue to analyze")]
         public string ScopeFilePath { get; set; }
 

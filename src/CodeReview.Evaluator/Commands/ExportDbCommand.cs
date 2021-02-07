@@ -60,17 +60,6 @@ namespace GodelTech.CodeReview.Evaluator.Commands
             
             _logger.LogInformation("Issues persisted");
 
-            foreach (var scriptFile in options.InitScripts ?? Array.Empty<string>())
-            {
-                _logger.LogInformation("Running init script. File = {filePath}", scriptFile);
-                
-                var content = await _fileService.ReadAllTextAsync(scriptFile);
-
-                await _databaseService.ExecuteNonQueryAsync(options.OutputPath, content);
-
-                _logger.LogInformation("Init script executed");
-            }
-
             return Constants.SuccessExitCode;
         }
     }
