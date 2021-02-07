@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Services.LocDetailsFilters;
 
 namespace GodelTech.CodeReview.Evaluator.Services
 {
@@ -13,10 +14,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (manifest == null)
                 throw new ArgumentNullException(nameof(manifest));
 
-            return new CompositeLocDetailsFilter(
+            return new CompositeFilter(
                 false,
                 CreateFilterFromManifest(true, manifest.Include),
-                new NotLocDetailsFilter(CreateFilterFromManifest(false, manifest.Exclude)));
+                new NotFilter(CreateFilterFromManifest(false, manifest.Exclude)));
         }
 
         private static ILocDetailsFilter CreateFilterFromManifest(bool resultOnEmptyFilterList, FilterManifest manifest)
@@ -26,9 +27,9 @@ namespace GodelTech.CodeReview.Evaluator.Services
             filter.AddRange(CreateFiltersFromFilterDefinitions(manifest.FilePath, x => x.FilePath));
 
             if (!filter.Any())
-                return new ConstantLocDetailsFilter(resultOnEmptyFilterList);
+                return new ConstantFilter(resultOnEmptyFilterList);
 
-            return new CompositeLocDetailsFilter(true, filter.ToArray());
+            return new CompositeFilter(true, filter.ToArray());
         }
 
         private static IEnumerable<ILocDetailsFilter> CreateFiltersFromFilterDefinitions(IEnumerable<FilterDefinition> definitions, Func<FileLocDetails, string> valueSelector)
@@ -44,7 +45,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                     predicate = x => regex.IsMatch(x ?? string.Empty);
                 }
 
-                yield return new GenericLocDetailsFilter<string>(valueSelector, predicate);
+                yield return new GenericFilter<string>(valueSelector, predicate);
             }
         }
     }

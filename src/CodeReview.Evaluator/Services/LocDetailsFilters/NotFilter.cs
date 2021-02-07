@@ -1,13 +1,13 @@
 ﻿using System;
 using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.LocDetailsFilters
 {
-    public class NotLocDetailsFilter : ILocDetailsFilter
+    public class NotFilter : ILocDetailsFilter
     {
         private readonly ILocDetailsFilter _innerFilter;
 
-        public NotLocDetailsFilter(ILocDetailsFilter innerFilter)
+        public NotFilter(ILocDetailsFilter innerFilter)
         {
             _innerFilter = innerFilter ?? throw new ArgumentNullException(nameof(innerFilter));
         }

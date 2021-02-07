@@ -2,7 +2,7 @@
 using System.Linq;
 using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.IssueFilters
 {
     public class CompositeIssueFilter : IIssueFilter
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.IssueFilters
 {
     public class ConstantFilter : IIssueFilter
     {

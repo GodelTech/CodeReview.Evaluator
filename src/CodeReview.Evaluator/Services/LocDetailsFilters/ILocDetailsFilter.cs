@@ -1,6 +1,6 @@
 ﻿using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.LocDetailsFilters
 {
     public interface ILocDetailsFilter
     {

@@ -1,13 +1,13 @@
 ﻿using System;
 using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.LocDetailsFilters
 {
-    public class ConstantLocDetailsFilter : ILocDetailsFilter
+    public class ConstantFilter : ILocDetailsFilter
     {
         private readonly bool _isMatch;
 
-        public ConstantLocDetailsFilter(bool isMatch)
+        public ConstantFilter(bool isMatch)
         {
             _isMatch = isMatch;
         }

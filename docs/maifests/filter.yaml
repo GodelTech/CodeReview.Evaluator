@@ -1,4 +1,12 @@
 exclude:
   filePath:
-  - pattern: src/.*
+  - pattern: .*/obj/.*
+    isRegex: true
+  - pattern: .*/bin/.*
+    isRegex: true
+  - pattern: .vs/.*
+    isRegex: true
+  - pattern: .github/.*
+    isRegex: true
+  - pattern: .idea/.*
     isRegex: true
