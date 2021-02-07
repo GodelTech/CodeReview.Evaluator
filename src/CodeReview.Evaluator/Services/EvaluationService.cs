@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GodelTech.CodeReview.Evaluator.Exceptions;
 using GodelTech.CodeReview.Evaluator.Models;
 
 namespace GodelTech.CodeReview.Evaluator.Services
@@ -10,16 +9,16 @@ namespace GodelTech.CodeReview.Evaluator.Services
     {
         private readonly IFileService _fileService;
         private readonly IJsonSerializer _jsonSerializer;
-        private readonly IDatabaseService _databaseService;
+        private readonly IDbRequestExecutorFactory _executorFactory;
 
         public EvaluationService(
             IFileService fileService, 
             IJsonSerializer jsonSerializer,
-            IDatabaseService databaseService)
+            IDbRequestExecutorFactory executorFactory)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _jsonSerializer = jsonSerializer ?? throw new ArgumentNullException(nameof(jsonSerializer));
-            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _executorFactory = executorFactory ?? throw new ArgumentNullException(nameof(executorFactory));
         }
         
         public async Task EvaluateAsync(EvaluationManifest manifest, string dbFilePath, string outputFilePath)
@@ -31,11 +30,12 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(outputFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(outputFilePath));
 
+            var executor = _executorFactory.Create(manifest, dbFilePath);
             var result = new Dictionary<string, object>();
             
             foreach (var (requestName, dbRequestManifest) in manifest.Requests)
             {
-                var queryResult = await ExecuteRequestAsync(manifest, dbFilePath, dbRequestManifest);
+                var queryResult = await executor.ExecuteAsync(requestName);
 
                 if (dbRequestManifest.AddToOutput)
                     result.Add(requestName, queryResult);
@@ -44,46 +44,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
             var json = _jsonSerializer.Serialize(result);
 
             await _fileService.WriteAllTextAsync(outputFilePath, json);
-        }
-
-        private async Task<object> ExecuteRequestAsync(EvaluationManifest manifest, string dbFilePath,
-            DbRequestManifest dbRequestManifest)
-        {
-            switch (dbRequestManifest.Type)
-            {
-                case RequestType.Scalar:
-                    return await _databaseService.ExecuteScalarAsync(dbFilePath,
-                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-                
-                case RequestType.Object:
-                    return await _databaseService.ExecuteObjectAsync(dbFilePath,
-                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-
-                case RequestType.Collection:
-                    return await _databaseService.ExecuteCollectionAsync(dbFilePath,
-                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-
-                case RequestType.NoResult:
-                    await _databaseService.ExecuteNonQueryAsync(
-                        dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-                    return null;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(dbRequestManifest.Type));
-            }
-        }
-
-        private static string GetQueryText(DbRequestManifest dbRequestManifest, IReadOnlyDictionary<string, QueryManifest> queries)
-        {
-            if (!string.IsNullOrWhiteSpace(dbRequestManifest.Query))
-                return dbRequestManifest.Query;
-
-            if (string.IsNullOrWhiteSpace(dbRequestManifest.QueryRef))
-                return string.Empty;
-
-            if (queries.TryGetValue(dbRequestManifest.QueryRef, out var manifest))
-                return manifest.Query;
-
-            throw new QueryExecutionException("Failed to resolve query text");
         }
     }
 }

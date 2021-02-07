@@ -24,7 +24,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
-            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, ParameterManifest>());
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, object>());
         }
 
         public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)
@@ -50,7 +50,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await CommitTransactionAsync(connection);
         }
 
-        public async Task ExecuteNonQueryAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task ExecuteNonQueryAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
@@ -66,7 +66,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task<object> ExecuteScalarAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteScalarAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null) 
                 throw new ArgumentNullException(nameof(parameters));
@@ -86,7 +86,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             return value == DBNull.Value ? null : value;
         }
 
-        public async Task<object> ExecuteObjectAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteObjectAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -106,7 +106,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             return reader.Read() ? ReadObject(reader.GetSchemaTable(), reader) : null;
         }
 
-        public async Task<object> ExecuteCollectionAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteCollectionAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -177,7 +177,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         #region Helper methods
 
-        private static SqliteCommand CreateCommand(string queryText, Dictionary<string, ParameterManifest> parameters, SqliteConnection connection)
+        private static SqliteCommand CreateCommand(string queryText, IReadOnlyDictionary<string, object> parameters, SqliteConnection connection)
         {
             var command = connection.CreateCommand();
 
@@ -185,21 +185,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             foreach (var (paramName, value) in parameters)
             {
-                command.Parameters.AddWithValue(ParameterNamePrefix + paramName, ResolveParameterValue(value));
+                command.Parameters.AddWithValue(ParameterNamePrefix + paramName, value);
             }
 
             return command;
-        }
-
-        private static object ResolveParameterValue(ParameterManifest parameterManifest)
-        {
-            if (parameterManifest.IsNull)
-                return DBNull.Value;
-
-            if (parameterManifest.IsInt)
-                return long.Parse(parameterManifest.Value);
-            
-            return parameterManifest.Value;
         }
 
         private static async Task BeginTransactionAsync(SqliteConnection connection)
