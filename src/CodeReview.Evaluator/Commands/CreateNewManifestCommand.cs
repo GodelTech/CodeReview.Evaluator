@@ -41,6 +41,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     {
                         Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
                         Type = RequestType.Scalar,
+                        AddToOutput = true,
                         StatusRanges = new()
                         {
                             ["red"] = new StatusRange {  Start = null, End = 100 },
@@ -62,12 +63,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     {
                         QueryRef = "query2",
                         Type = RequestType.Object,
-                        StatusRanges = new()
-                        {
-                            ["red"] = new StatusRange { Start = null, End = 100 },
-                            ["amber"] = new StatusRange { Start = 100, End = 200 },
-                            ["green"] = new StatusRange { Start = 300, End = null }
-                        },
+                        StatusRanges = null,
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
@@ -92,12 +88,14 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                                 IsInt = true,
                                 IsNull = false
                             }
-                        }
+                        },
+                        StatusRanges = null
                     },
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query1",
                         Type = RequestType.NoResult,
+                        AddToOutput = false,
                         Parameters = new()
                         {
                             ["RuleId"] = new ParameterManifest
@@ -107,7 +105,8 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                                 IsInt = true,
                                 IsNull = false
                             }
-                        }
+                        },
+                        StatusRanges = null
                     }
                 }
             };

@@ -37,7 +37,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             {
                 var queryResult = await ExecuteRequestAsync(manifest, dbFilePath, dbRequestManifest);
 
-                if (queryResult != null)
+                if (dbRequestManifest.AddToOutput)
                     result.Add(requestName, queryResult);
             }
             

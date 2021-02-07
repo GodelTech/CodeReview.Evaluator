@@ -12,6 +12,8 @@ namespace GodelTech.CodeReview.Evaluator.Models
 
         public RequestType Type { get; set; }
 
+        public bool AddToOutput { get; set; } = true;
+
         [Required]
         public Dictionary<string, ParameterManifest> Parameters { get; set; } = new();
 
