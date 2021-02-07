@@ -32,9 +32,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
         private bool ValidateQueryAndQueryRef(EvaluationManifest manifest)
         {
             var neitherQueryNoQueryRefRequests =
-                manifest.Scalars
-                    .Concat(manifest.Collections)
-                    .Concat(manifest.Objects)
+                manifest.Requests
                     .Where(x => string.IsNullOrWhiteSpace(x.Value.QueryRef) && string.IsNullOrWhiteSpace(x.Value.Query))
                     .Select(x => x.Key)
                     .ToArray();
@@ -67,9 +65,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
         private bool ValidateQueryReferences(EvaluationManifest manifest)
         {
             var allFilters =
-                manifest.Scalars
-                    .Concat(manifest.Collections)
-                    .Concat(manifest.Objects)
+                manifest.Requests
                     .Select(x => x.Value)
                     .ToArray();
 

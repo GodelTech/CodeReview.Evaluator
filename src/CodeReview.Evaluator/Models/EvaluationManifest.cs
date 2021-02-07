@@ -8,13 +8,6 @@ namespace GodelTech.CodeReview.Evaluator.Models
         [Required]
         public Dictionary<string, QueryManifest> Queries { get; set; } = new();
 
-        [Required]
-        public Dictionary<string, DbRequestManifest> Scalars { get; set; } = new();
-
-        [Required]
-        public Dictionary<string, DbRequestManifest> Objects { get; set; } = new();
-
-        [Required]
-        public Dictionary<string, DbRequestManifest> Collections { get; set; } = new();
+        public Dictionary<string, DbRequestManifest> Requests { get; set; } = new();
     }
 }

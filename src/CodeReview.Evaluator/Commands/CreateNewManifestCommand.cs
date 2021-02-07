@@ -35,16 +35,24 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                         Query = "SELECT COUNT(*) FROM Issues WHERE Category = @Category"
                     }
                 },
-                Scalars = new()
+                Requests = new()
                 {
                     ["inlineQuery"] = new()
                     {
                         Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
+                        RequestType = RequestType.Scalar,
+                        StatusRanges = new()
+                        {
+                            ["red"] = new StatusRange {  Start = null, End = 100 },
+                            ["amber"] = new StatusRange {  Start = 100, End = 200 },
+                            ["green"] = new StatusRange {  Start = 300, End = null }
+                        },
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
                             {
                                 Value = "123",
+                                IsValueRef = true,
                                 IsInt = false,
                                 IsNull = false
                             }
@@ -53,27 +61,34 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query2",
+                        RequestType = RequestType.Object,
+                        StatusRanges = new()
+                        {
+                            ["red"] = new StatusRange { Start = null, End = 100 },
+                            ["amber"] = new StatusRange { Start = 100, End = 200 },
+                            ["green"] = new StatusRange { Start = 300, End = null }
+                        },
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
                             {
                                 Value = "123",
+                                IsValueRef = true,
                                 IsInt = false,
                                 IsNull = false
                             }
                         }
-                    }
-                },
-                Objects = new ()
-                {
+                    },
                     ["inlineQuery"] = new()
                     {
                         Query = "SELECT TOP 1 * FROM Issues WHERE IssueId = @IssueId",
+                        RequestType = RequestType.Collection,
                         Parameters = new ()
                         {
                             ["IssueId"] = new ParameterManifest
                             {
                                 Value = "123",
+                                IsValueRef = true,
                                 IsInt = true,
                                 IsNull = false
                             }
@@ -82,40 +97,13 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query1",
+                        RequestType = RequestType.NoResult,
                         Parameters = new()
                         {
                             ["RuleId"] = new ParameterManifest
                             {
                                 Value = "123",
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        }
-                    }
-                },
-                Collections = new()
-                {
-                    ["inlineQuery"] = new()
-                    {
-                        Query = "SELECT * FROM Issues WHERE IssueId = @IssueId",
-                        Parameters = new()
-                        {
-                            ["IssueId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        }
-                    },
-                    ["queryReference"] = new ()
-                    {
-                        QueryRef = "query1",
-                        Parameters = new()
-                        {
-                            ["RuleId"] = new ParameterManifest
-                            {
-                                Value = "123",
+                                IsValueRef = true,
                                 IsInt = true,
                                 IsNull = false
                             }

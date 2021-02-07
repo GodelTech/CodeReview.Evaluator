@@ -24,7 +24,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
-            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript());
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, ParameterManifest>());
         }
 
         public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)
@@ -50,20 +50,18 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await CommitTransactionAsync(connection);
         }
 
-        public async Task ExecuteNonQueryAsync(string dbFilePath, string sql)
+        public async Task ExecuteNonQueryAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
-            if (string.IsNullOrWhiteSpace(sql))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(sql));
+            if (string.IsNullOrWhiteSpace(queryText))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(queryText));
             
             await using var connection = new SqliteConnection(BuildConnectionString(dbFilePath));
 
             await connection.OpenAsync();
 
-            var command = connection.CreateCommand();
-
-            command.CommandText = sql;
+            var command = CreateCommand(queryText, parameters, connection);
 
             await command.ExecuteNonQueryAsync();
         }

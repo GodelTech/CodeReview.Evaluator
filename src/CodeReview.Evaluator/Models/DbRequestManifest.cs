@@ -10,7 +10,11 @@ namespace GodelTech.CodeReview.Evaluator.Models
         [MaxLength(Constants.ValueMaxLength)]
         public string QueryRef { get; set; }
 
+        public RequestType RequestType { get; set; }
+
         [Required]
         public Dictionary<string, ParameterManifest> Parameters { get; set; } = new();
+
+        public Dictionary<string, StatusRange> StatusRanges { get; set; } = new();
     }
 }

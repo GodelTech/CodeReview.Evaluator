@@ -31,32 +31,45 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(outputFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(outputFilePath));
 
-            var result = new EvaluationResult();
+            var result = new Dictionary<string, object>();
             
-            foreach (var (scalarName, dbRequestManifest) in manifest.Scalars)
+            foreach (var (requestName, dbRequestManifest) in manifest.Requests)
             {
-                var queryResult = await _databaseService.ExecuteScalarAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-               
-                result.Scalars.Add(scalarName, queryResult);
+                var queryResult = await ExecuteRequestAsync(manifest, dbFilePath, dbRequestManifest);
+
+                if (queryResult != null)
+                    result.Add(requestName, queryResult);
             }
-
-            foreach (var (objectName, dbRequestManifest) in manifest.Objects)
-            {
-                var queryResult = await _databaseService.ExecuteObjectAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-
-                result.Objects.Add(objectName, queryResult);
-            }
-
-            foreach (var (collectionName, dbRequestManifest) in manifest.Collections)
-            {
-                var queryResult = await _databaseService.ExecuteCollectionAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-
-                result.Collections.Add(collectionName, queryResult);
-            }
-
+            
             var json = _jsonSerializer.Serialize(result);
 
             await _fileService.WriteAllTextAsync(outputFilePath, json);
+        }
+
+        private async Task<object> ExecuteRequestAsync(EvaluationManifest manifest, string dbFilePath,
+            DbRequestManifest dbRequestManifest)
+        {
+            switch (dbRequestManifest.RequestType)
+            {
+                case RequestType.Scalar:
+                    return await _databaseService.ExecuteScalarAsync(dbFilePath,
+                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
+                
+                case RequestType.Object:
+                    return await _databaseService.ExecuteObjectAsync(dbFilePath,
+                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
+
+                case RequestType.Collection:
+                    return await _databaseService.ExecuteCollectionAsync(dbFilePath,
+                        GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
+
+                case RequestType.NoResult:
+                    await _databaseService.ExecuteNonQueryAsync(
+                        dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
+                    return null;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(dbRequestManifest.RequestType));
+            }
         }
 
         private static string GetQueryText(DbRequestManifest dbRequestManifest, IReadOnlyDictionary<string, QueryManifest> queries)
