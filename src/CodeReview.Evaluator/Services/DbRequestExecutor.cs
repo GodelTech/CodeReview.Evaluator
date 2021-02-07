@@ -40,12 +40,12 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(queryName))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(queryName));
             
-            return ExecuteRecursiveAsync(1, queryName);
+            return ExecuteRecursiveAsync(0, queryName);
         }
 
         private async Task<object> ExecuteRecursiveAsync(int recursionDepth, string queryName)
         {
-            if (recursionDepth > MaxRecursionDepth)
+            if (recursionDepth >= MaxRecursionDepth)
                 throw new EvaluateException("Max recursion depth reached");
             
             if (_cache.TryGetValue(queryName, out var result))
@@ -57,7 +57,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             _cache.Add(queryName, executionResult);
             
-            return null;
+            return executionResult;
         }
 
         private async Task<object> ExecuteRequestAsync(int recursionDepth, DbRequestManifest dbRequestManifest)
