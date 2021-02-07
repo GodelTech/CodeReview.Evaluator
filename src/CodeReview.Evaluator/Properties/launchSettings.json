@@ -2,11 +2,11 @@
   "profiles": {
     "ReviewItEasy.Evaluator - Export": {
       "commandName": "Project",
-      "commandLineArgs": "export-db -o result.db  -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/maifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+      "commandLineArgs": "export-db -o result.db  -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
     },
     "ReviewItEasy.Evaluator - Evaluate": {
       "commandName": "Project",
-      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/maifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/maifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/maifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
     }
   }
 }
