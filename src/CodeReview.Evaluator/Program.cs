@@ -92,6 +92,10 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IScopeManifestValidator, ScopeManifestValidator>();
             serviceProvider.AddTransient<IEvaluationManifestValidator, EvaluationManifestValidator>();
             
+            serviceProvider.AddTransient<IDbRequestExecutorFactory, DbRequestExecutorFactory>();
+            serviceProvider.AddTransient<IScopeManifestProvider, ScopeManifestProvider>();
+            serviceProvider.AddTransient<ILocDetailsFilterFactory, LocDetailsFilterFactory>();
+            serviceProvider.AddTransient<IFileLocDetailsProvider, FileLocDetailsProvider>();
             serviceProvider.AddTransient<IIssueService, IssueService>();
             serviceProvider.AddTransient<IIssueFilterFactory, IssueFilterFactory>();
             serviceProvider.AddTransient<IEvaluationService, EvaluationService>();

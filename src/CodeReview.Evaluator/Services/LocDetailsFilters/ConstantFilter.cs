@@ -1,9 +1,9 @@
 ﻿using System;
 using GodelTech.CodeReview.Evaluator.Models;
 
-namespace GodelTech.CodeReview.Evaluator.Services
+namespace GodelTech.CodeReview.Evaluator.Services.LocDetailsFilters
 {
-    public class ConstantFilter : IIssueFilter
+    public class ConstantFilter : ILocDetailsFilter
     {
         private readonly bool _isMatch;
 
@@ -12,10 +12,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
             _isMatch = isMatch;
         }
 
-        public bool IsMatch(Issue issue)
+        public bool IsMatch(FileLocDetails item)
         {
-            if (issue == null)
-                throw new ArgumentNullException(nameof(issue));
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
 
             return _isMatch;
         }

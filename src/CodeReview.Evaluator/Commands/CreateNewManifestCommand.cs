@@ -35,16 +35,25 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                         Query = "SELECT COUNT(*) FROM Issues WHERE Category = @Category"
                     }
                 },
-                Scalars = new()
+                Requests = new()
                 {
                     ["inlineQuery"] = new()
                     {
                         Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
+                        Type = RequestType.Scalar,
+                        AddToOutput = true,
+                        Ranges = new()
+                        {
+                            ["red"] = new ValueRange {  Start = null, End = 100 },
+                            ["amber"] = new ValueRange {  Start = 100, End = 200 },
+                            ["green"] = new ValueRange {  Start = 300, End = null }
+                        },
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
                             {
                                 Value = "123",
+                                IsValueRef = true,
                                 IsInt = false,
                                 IsNull = false
                             }
@@ -53,70 +62,15 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     ["queryReference"] = new ()
                     {
                         QueryRef = "query2",
+                        Type = RequestType.Object,
+                        Ranges = null,
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
                             {
                                 Value = "123",
+                                IsValueRef = true,
                                 IsInt = false,
-                                IsNull = false
-                            }
-                        }
-                    }
-                },
-                Objects = new ()
-                {
-                    ["inlineQuery"] = new()
-                    {
-                        Query = "SELECT TOP 1 * FROM Issues WHERE IssueId = @IssueId",
-                        Parameters = new ()
-                        {
-                            ["IssueId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        }
-                    },
-                    ["queryReference"] = new ()
-                    {
-                        QueryRef = "query1",
-                        Parameters = new()
-                        {
-                            ["RuleId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        }
-                    }
-                },
-                Collections = new()
-                {
-                    ["inlineQuery"] = new()
-                    {
-                        Query = "SELECT * FROM Issues WHERE IssueId = @IssueId",
-                        Parameters = new()
-                        {
-                            ["IssueId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        }
-                    },
-                    ["queryReference"] = new ()
-                    {
-                        QueryRef = "query1",
-                        Parameters = new()
-                        {
-                            ["RuleId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsInt = true,
                                 IsNull = false
                             }
                         }

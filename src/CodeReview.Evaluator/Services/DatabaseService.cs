@@ -24,28 +24,49 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
-            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript());
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, object>());
         }
 
-        public async Task ExecuteNonQueryAsync(string dbFilePath, string sql)
+        public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)
+        {
+            if (items == null) 
+                throw new ArgumentNullException(nameof(items));
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            await using var connection = new SqliteConnection(BuildConnectionString(dbFilePath));
+
+            await connection.OpenAsync();
+
+            // This action is required to speed up insert operation
+            // https://stackoverflow.com/questions/3852068/sqlite-insert-very-slow
+            await BeginTransactionAsync(connection);
+
+            foreach (var item in items)
+            {
+                await SaveLocItemAsync(connection, item);
+            }
+
+            await CommitTransactionAsync(connection);
+        }
+
+        public async Task ExecuteNonQueryAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
-            if (string.IsNullOrWhiteSpace(sql))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(sql));
+            if (string.IsNullOrWhiteSpace(queryText))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(queryText));
             
             await using var connection = new SqliteConnection(BuildConnectionString(dbFilePath));
 
             await connection.OpenAsync();
 
-            var command = connection.CreateCommand();
-
-            command.CommandText = sql;
+            var command = CreateCommand(queryText, parameters, connection);
 
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task<object> ExecuteScalarAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteScalarAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null) 
                 throw new ArgumentNullException(nameof(parameters));
@@ -65,7 +86,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             return value == DBNull.Value ? null : value;
         }
 
-        public async Task<object> ExecuteObjectAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteObjectAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -85,7 +106,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             return reader.Read() ? ReadObject(reader.GetSchemaTable(), reader) : null;
         }
 
-        public async Task<object> ExecuteCollectionAsync(string dbFilePath, string queryText, Dictionary<string, ParameterManifest> parameters)
+        public async Task<object> ExecuteCollectionAsync(string dbFilePath, string queryText, IReadOnlyDictionary<string, object> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException(nameof(parameters));
@@ -156,7 +177,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         #region Helper methods
 
-        private static SqliteCommand CreateCommand(string queryText, Dictionary<string, ParameterManifest> parameters, SqliteConnection connection)
+        private static SqliteCommand CreateCommand(string queryText, IReadOnlyDictionary<string, object> parameters, SqliteConnection connection)
         {
             var command = connection.CreateCommand();
 
@@ -164,21 +185,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             foreach (var (paramName, value) in parameters)
             {
-                command.Parameters.AddWithValue(ParameterNamePrefix + paramName, ResolveParameterValue(value));
+                command.Parameters.AddWithValue(ParameterNamePrefix + paramName, value);
             }
 
             return command;
-        }
-
-        private static object ResolveParameterValue(ParameterManifest parameterManifest)
-        {
-            if (parameterManifest.IsNull)
-                return DBNull.Value;
-
-            if (parameterManifest.IsInt)
-                return long.Parse(parameterManifest.Value);
-            
-            return parameterManifest.Value;
         }
 
         private static async Task BeginTransactionAsync(SqliteConnection connection)
@@ -208,6 +218,35 @@ namespace GodelTech.CodeReview.Evaluator.Services
             {
                 await SaveTagAsync(connection, issue.Id, tag);
             }
+        }
+
+        private static async Task SaveLocItemAsync(SqliteConnection connection, FileLocDetails details)
+        {
+            var issueCommand = connection.CreateCommand();
+
+            issueCommand.CommandText = @"INSERT INTO FileDetails 
+            (
+	            FilePath,
+	            Language,
+	            Blank,
+	            Code,
+	            Commented
+            )
+            VALUES (
+                $filePath,
+                $language,
+                $blank,
+                $code,
+                $commented
+            );";
+
+            issueCommand.Parameters.AddWithValue("$filePath", details.FilePath);
+            issueCommand.Parameters.AddWithValue("$language", details.Language ?? string.Empty);
+            issueCommand.Parameters.AddWithValue("$blank", details.Blank);
+            issueCommand.Parameters.AddWithValue("$code", details.Code);
+            issueCommand.Parameters.AddWithValue("$commented", details.Commented);
+
+            await issueCommand.ExecuteNonQueryAsync();
         }
 
         private static async Task SaveIssueAsync(SqliteConnection connection, Issue issue)

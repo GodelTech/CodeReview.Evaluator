@@ -9,11 +9,11 @@ namespace GodelTech.CodeReview.Evaluator.Models
     // The purpose of this class avoiding infinite deserialization loop
     public class ParameterManifestBase
     {
-        [Required]
         [MaxLength(Constants.ValueMaxLength)]
         public string Value { get; set; }
         public bool IsNull { get; set; }
         public bool IsInt { get; set; }
+        public bool IsValueRef { get; set; }
     }
     
     public class ParameterManifest : ParameterManifestBase, IYamlConvertible

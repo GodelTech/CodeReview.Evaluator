@@ -1,8 +1,12 @@
 {
   "profiles": {
-    "ReviewItEasy.Evaluator": {
+    "ReviewItEasy.Evaluator - Export": {
       "commandName": "Project",
-      "commandLineArgs": "evaluate -o result.json -m d:\\_Projects\\ReviewItEasy.Evaluator\\docs\\maifests\\manifest.yaml -f d:\\_Projects\\ReviewItEasy.Orchestrator\\src\\ReviewItEasy.Orchestrator\\bin\\Debug\\net5.0\\artifacts\\resharper-result.zip -s d:\\_Projects\\ReviewItEasy.Evaluator\\docs\\maifests\\filter.yaml"
+      "commandLineArgs": "export-db -o result.db  -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+    },
+    "ReviewItEasy.Evaluator - Evaluate": {
+      "commandName": "Project",
+      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
     }
   }
 }

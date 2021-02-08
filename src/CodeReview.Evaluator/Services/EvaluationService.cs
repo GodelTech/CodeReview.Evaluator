@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using GodelTech.CodeReview.Evaluator.Exceptions;
 using GodelTech.CodeReview.Evaluator.Models;
+using Microsoft.Extensions.Logging;
 
 namespace GodelTech.CodeReview.Evaluator.Services
 {
@@ -10,16 +11,19 @@ namespace GodelTech.CodeReview.Evaluator.Services
     {
         private readonly IFileService _fileService;
         private readonly IJsonSerializer _jsonSerializer;
-        private readonly IDatabaseService _databaseService;
+        private readonly IDbRequestExecutorFactory _executorFactory;
+        private readonly ILogger<EvaluationService> _logger;
 
         public EvaluationService(
             IFileService fileService, 
             IJsonSerializer jsonSerializer,
-            IDatabaseService databaseService)
+            IDbRequestExecutorFactory executorFactory,
+            ILogger<EvaluationService> logger)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _jsonSerializer = jsonSerializer ?? throw new ArgumentNullException(nameof(jsonSerializer));
-            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
+            _executorFactory = executorFactory ?? throw new ArgumentNullException(nameof(executorFactory));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         
         public async Task EvaluateAsync(EvaluationManifest manifest, string dbFilePath, string outputFilePath)
@@ -31,27 +35,19 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (string.IsNullOrWhiteSpace(outputFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(outputFilePath));
 
-            var result = new EvaluationResult();
+            var executor = _executorFactory.Create(manifest, dbFilePath);
+            var result = new Dictionary<string, object>();
             
-            foreach (var (scalarName, dbRequestManifest) in manifest.Scalars)
+            foreach (var (requestName, dbRequestManifest) in manifest.Requests)
             {
-                var queryResult = await _databaseService.ExecuteScalarAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-               
-                result.Scalars.Add(scalarName, queryResult);
-            }
+                _logger.LogInformation("Starting evaluation of \"{request}\" request...",  requestName);
+                
+                var queryResult = await executor.ExecuteAsync(requestName);
 
-            foreach (var (objectName, dbRequestManifest) in manifest.Objects)
-            {
-                var queryResult = await _databaseService.ExecuteObjectAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
+                if (dbRequestManifest.AddToOutput)
+                    result.Add(requestName, ResolveResult(queryResult, dbRequestManifest));
 
-                result.Objects.Add(objectName, queryResult);
-            }
-
-            foreach (var (collectionName, dbRequestManifest) in manifest.Collections)
-            {
-                var queryResult = await _databaseService.ExecuteCollectionAsync(dbFilePath, GetQueryText(dbRequestManifest, manifest.Queries), dbRequestManifest.Parameters);
-
-                result.Collections.Add(collectionName, queryResult);
+                _logger.LogInformation("Evaluation completed", requestName);
             }
 
             var json = _jsonSerializer.Serialize(result);
@@ -59,18 +55,28 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await _fileService.WriteAllTextAsync(outputFilePath, json);
         }
 
-        private static string GetQueryText(DbRequestManifest dbRequestManifest, IReadOnlyDictionary<string, QueryManifest> queries)
+        private static object ResolveResult(object queryResult, DbRequestManifest dbRequestManifest)
         {
-            if (!string.IsNullOrWhiteSpace(dbRequestManifest.Query))
-                return dbRequestManifest.Query;
+            if (dbRequestManifest.Type != RequestType.Scalar)
+                return queryResult;
 
-            if (string.IsNullOrWhiteSpace(dbRequestManifest.QueryRef))
-                return string.Empty;
+            if (!dbRequestManifest.Ranges.Any())
+                return queryResult;
 
-            if (queries.TryGetValue(dbRequestManifest.QueryRef, out var manifest))
-                return manifest.Query;
+            return new
+            {
+                Value = queryResult,
+                Range = ResolveRange(queryResult, dbRequestManifest.Ranges)
+            };
+        }
 
-            throw new QueryExecutionException("Failed to resolve query text");
+        private static string ResolveRange(object queryResult, Dictionary<string, ValueRange> ranges)
+        {
+           return
+               (from item in ranges
+               where item.Value.IsInRange(queryResult)
+               select item.Key)
+               .FirstOrDefault();
         }
     }
 }

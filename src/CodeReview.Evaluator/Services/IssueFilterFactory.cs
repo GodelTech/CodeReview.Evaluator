@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Services.IssueFilters;
 
 namespace GodelTech.CodeReview.Evaluator.Services
 {
@@ -12,7 +13,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
         {
             if (manifest == null) 
                 throw new ArgumentNullException(nameof(manifest));
-
 
             return new CompositeIssueFilter(
                 false,

@@ -21,6 +21,9 @@ namespace GodelTech.CodeReview.Evaluator.Services
             if (options == null) 
                 throw new ArgumentNullException(nameof(options));
 
+            if (string.IsNullOrWhiteSpace(options.Path))
+                yield break;
+
             if (_fileService.Exists(options.Path))
             {
                 yield return options.Path;
