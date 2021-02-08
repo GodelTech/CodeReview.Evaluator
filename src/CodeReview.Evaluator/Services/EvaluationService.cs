@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GodelTech.CodeReview.Evaluator.Models;
 using Microsoft.Extensions.Logging;
@@ -44,8 +45,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 var queryResult = await executor.ExecuteAsync(requestName);
 
                 if (dbRequestManifest.AddToOutput)
-                    // TODO: Evaluate quality gate
-                    result.Add(requestName, queryResult);
+                    result.Add(requestName, ResolveResult(queryResult, dbRequestManifest));
 
                 _logger.LogInformation("Evaluation completed", requestName);
             }
@@ -53,6 +53,30 @@ namespace GodelTech.CodeReview.Evaluator.Services
             var json = _jsonSerializer.Serialize(result);
 
             await _fileService.WriteAllTextAsync(outputFilePath, json);
+        }
+
+        private static object ResolveResult(object queryResult, DbRequestManifest dbRequestManifest)
+        {
+            if (dbRequestManifest.Type != RequestType.Scalar)
+                return queryResult;
+
+            if (!dbRequestManifest.Ranges.Any())
+                return queryResult;
+
+            return new
+            {
+                Data = queryResult,
+                Range = ResolveRange(queryResult, dbRequestManifest.Ranges)
+            };
+        }
+
+        private static string ResolveRange(object queryResult, Dictionary<string, ValueRange> ranges)
+        {
+           return
+               (from item in ranges
+               where item.Value.IsInRange(queryResult)
+               select item.Key)
+               .FirstOrDefault();
         }
     }
 }

@@ -42,11 +42,11 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                         Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
                         Type = RequestType.Scalar,
                         AddToOutput = true,
-                        StatusRanges = new()
+                        Ranges = new()
                         {
-                            ["red"] = new StatusRange {  Start = null, End = 100 },
-                            ["amber"] = new StatusRange {  Start = 100, End = 200 },
-                            ["green"] = new StatusRange {  Start = 300, End = null }
+                            ["red"] = new ValueRange {  Start = null, End = 100 },
+                            ["amber"] = new ValueRange {  Start = 100, End = 200 },
+                            ["green"] = new ValueRange {  Start = 300, End = null }
                         },
                         Parameters = new()
                         {
@@ -63,7 +63,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                     {
                         QueryRef = "query2",
                         Type = RequestType.Object,
-                        StatusRanges = null,
+                        Ranges = null,
                         Parameters = new()
                         {
                             ["IssueId"] = new ParameterManifest
@@ -89,7 +89,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                                 IsNull = false
                             }
                         },
-                        StatusRanges = null
+                        Ranges = null
                     },
                     ["queryReference"] = new ()
                     {
@@ -106,7 +106,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                                 IsNull = false
                             }
                         },
-                        StatusRanges = null
+                        Ranges = null
                     }
                 }
             };

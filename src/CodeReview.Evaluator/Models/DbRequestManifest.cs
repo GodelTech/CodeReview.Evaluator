@@ -17,6 +17,6 @@ namespace GodelTech.CodeReview.Evaluator.Models
         [Required]
         public Dictionary<string, ParameterManifest> Parameters { get; set; } = new();
 
-        public Dictionary<string, StatusRange> StatusRanges { get; set; } = new();
+        public Dictionary<string, ValueRange> Ranges { get; set; } = new();
     }
 }

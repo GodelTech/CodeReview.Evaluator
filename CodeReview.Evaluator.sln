@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeReview.Evaluator", "src\CodeReview.Evaluator\CodeReview.Evaluator.csproj", "{E297967E-0435-4A13-A62B-608753C83F8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReview.Evaluator.Tests", "test\CodeReview.Evaluator.Tests\CodeReview.Evaluator.Tests.csproj", "{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E297967E-0435-4A13-A62B-608753C83F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E297967E-0435-4A13-A62B-608753C83F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E297967E-0435-4A13-A62B-608753C83F8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
