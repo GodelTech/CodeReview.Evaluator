@@ -74,39 +74,6 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                                 IsNull = false
                             }
                         }
-                    },
-                    ["inlineQuery"] = new()
-                    {
-                        Query = "SELECT TOP 1 * FROM Issues WHERE IssueId = @IssueId",
-                        Type = RequestType.Collection,
-                        Parameters = new ()
-                        {
-                            ["IssueId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsValueRef = true,
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        },
-                        Ranges = null
-                    },
-                    ["queryReference"] = new ()
-                    {
-                        QueryRef = "query1",
-                        Type = RequestType.NoResult,
-                        AddToOutput = false,
-                        Parameters = new()
-                        {
-                            ["RuleId"] = new ParameterManifest
-                            {
-                                Value = "123",
-                                IsValueRef = true,
-                                IsInt = true,
-                                IsNull = false
-                            }
-                        },
-                        Ranges = null
                     }
                 }
             };

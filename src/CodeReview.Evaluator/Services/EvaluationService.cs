@@ -65,7 +65,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             return new
             {
-                Data = queryResult,
+                Value = queryResult,
                 Range = ResolveRange(queryResult, dbRequestManifest.Ranges)
             };
         }
