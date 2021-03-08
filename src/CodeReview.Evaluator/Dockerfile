@@ -9,9 +9,6 @@ RUN dotnet publish ./CodeReview.Evaluator/CodeReview.Evaluator.csproj -c Release
 
 FROM mcr.microsoft.com/dotnet/runtime:5.0 AS runtime
 
-RUN apt-get update
-RUN apt-get --yes install nuget
-
 WORKDIR /app
 COPY --from=build /app/CodeReview.Evaluator/out .
 ENTRYPOINT ["dotnet", "CodeReview.Evaluator.dll"]

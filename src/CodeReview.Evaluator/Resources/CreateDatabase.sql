@@ -14,6 +14,7 @@ CREATE TABLE "Issues" (
 	"Id"	INTEGER,
 	"RuleId"	TEXT NOT NULL,
 	"Level"	TEXT NOT NULL,
+	"Title"	TEXT NOT NULL,
 	"Message"	TEXT NOT NULL,
 	"Description"	TEXT,
 	"DetailsUrl"	TEXT,
