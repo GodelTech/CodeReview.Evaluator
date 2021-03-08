@@ -258,6 +258,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 	            Id, 
 	            RuleId,
 	            Level,
+                Title,
 	            Message,
 	            Description,
 	            DetailsUrl,
@@ -267,6 +268,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 $id,	
                 $ruleId,
                 $level,
+                $title,
                 $message,
                 $description,
                 $detailsUrl,
@@ -276,6 +278,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
             issueCommand.Parameters.AddWithValue("$id", issue.Id);
             issueCommand.Parameters.AddWithValue("$ruleId", issue.RuleId);
             issueCommand.Parameters.AddWithValue("$level", issue.Level);
+            issueCommand.Parameters.AddWithValue("$title", issue.Title);
             issueCommand.Parameters.AddWithValue("$message", issue.Message);
             issueCommand.Parameters.AddWithValue("$description", (object) issue.Description ?? DBNull.Value);
             issueCommand.Parameters.AddWithValue("$detailsUrl", (object) issue.DetailsUrl ?? DBNull.Value);
