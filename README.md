@@ -1,57 +1,49 @@
 # Introduction 
 
-How to build image 
+#### evaluate
+Create issue summary using provided manifest
+<pre>
+> dotnet CodeReview.Evaluator.dll evaluate -m manifest.yml -r false -o result.json
+</pre>
+| Agruments     | Key       | Required                          | Type      | Description agrument      |
+| ------------- | --------- | --------------------------------- | --------- | ------------------------- |
+| --manifest    | -m        | true                              | string    | Manifest file path        |
+| --loc         | -l        | false                             | string    | Lines of code statistics  |
+| --folder      | -f        | false                             | string    | Path to folder or file to process  |
+| --pattern     | -p        | false; "*" by defalut             | string    | Search pattern used to look for files within folder  |
+| --recurse     | -r        | true; true by defalut             | bool      | Specifies if recurse search must be used for for files in folder  |
+| --scope       | -s        | false                             | string    | Scope of issue to analyze |
+| --output      | -o        | true                              | string    | Output file path |
 
-docker build -t godeltech/codereview.evaluator:0.0.1 -f src/CodeReview.Evaluator/Dockerfile ./src
-docker image tag godeltech/codereview.evaluator:0.0.1 godeltech/codereview.evaluator:latest
-docker push godeltech/codereview.evaluator:latest
-docker push godeltech/codereview.evaluator:0.0.1
+#### export-db
+Create issue summary and export db with result
+<pre>
+> dotnet CodeReview.Evaluator.dll export-db -r false -o result.db
+</pre>
+| Agruments     | Key       | Required                          | Type      | Description agrument      |
+| ------------- | --------- | --------------------------------- | --------- | ------------------------- |
+| --loc         | -l        | false                             | string    | Lines of code statistics  |
+| --folder      | -f        | false                             | string    | Path to folder or file to process  |
+| --pattern     | -p        | false; "*" by defalut             | string    | Search pattern used to look for files within folder  |
+| --recurse     | -r        | true; true by defalut             | bool      | Specifies if recurse search must be used for for files in folder  |
+| --scope       | -s        | false                             | string    | Scope of issue to analyze |
+| --output      | -o        | true                              | string    | Output file path |
 
-Run:
 
-docker run -v "/d/temp:/result"   --rm godeltech/codereview.evaluator  run -p SonarAnalyzer.CSharp -o /result/result.yaml -j
+#### new-manifest
+Creates new manifest which can be used as draft manifest
+<pre>
+> dotnet CodeReview.Evaluator.dll new-manifest -o output.yml
+</pre>
+| Agruments     | Key       | Required                          | Type      | Description agrument      |
+| ------------- | --------- | --------------------------------- | --------- | ------------------------- |
+| --output      | -o        | true                              | string    | Output file path          |
 
-Debug:
-
-docker run -v "/d/temp:/result" -it --rm  --entrypoint /bin/bash  godeltech/codereview.evaluator
-
-The following tool can be used to calculate line count:
-
-[Cloc](https://github.com/AlDanial/cloc)
-
-Command line to execute
-```bash
-docker run --rm -v $PWD:/tmp aldanial/cloc . --by-file-by-lang --report-file=report.yaml --yaml
-```
-Example of report:
-
-```yaml
----
-# github.com/AlDanial/cloc
-header : 
-  cloc_url           : github.com/AlDanial/cloc
-  cloc_version       : 1.88
-  elapsed_seconds    : 10.9346380233765
-  n_files            : 155
-  n_lines            : 80124
-  files_per_second   : 14.1751377291718
-  lines_per_second   : 7327.54022846554
-  report_file        : report.yaml
-'./test/GodelTech.Microservices.Website/wwwroot/lib/bootstrap/dist/css/bootstrap.css' :
-  blank: 1199
-  comment: 7
-  code: 8832
-  language: CSS
-'./test/GodelTech.Microservices.Core.Tests/obj/project.assets.json' :
-  blank: 0
-  comment: 0
-  code: 7705
-  language: JSON
-```
-
-Installing `cloc` for Ubunitu: [instructions](https://zoomadmin.com/HowToInstall/UbuntuPackage/cloc). The following commands must be used:
-
-```bash
-sudo apt-get update -y
-sudo apt-get install -y cloc
-```
+#### new-filter
+Creates new filter which can be used as draft for real filter
+<pre>
+> dotnet CodeReview.Evaluator.dll new-filter -o output.yml
+</pre>
+| Agruments     | Key       | Required                          | Type      | Description agrument      |
+| ------------- | --------- | --------------------------------- | --------- | ------------------------- |
+| --output      | -o        | true                              | string    | Output file path          |
