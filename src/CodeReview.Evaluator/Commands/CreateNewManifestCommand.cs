@@ -39,7 +39,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                 {
                     ["inlineQuery"] = new()
                     {
-                        Query = "SELECT COUNT(*) FROM Issues WHERE IssueId = @IssueId",
+                        Query = "SELECT COUNT(*) FROM Issues WHERE Id = @IssueId",
                         Type = RequestType.Scalar,
                         AddToOutput = true,
                         Ranges = new()
