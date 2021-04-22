@@ -1,4 +1,6 @@
-﻿namespace GodelTech.CodeReview.Evaluator.Models
+﻿using System.Collections.Generic;
+
+namespace GodelTech.CodeReview.Evaluator.Models
 {
     public class Issue
     {
@@ -12,5 +14,6 @@
         public string Category { get; set; } // Minor Code Smell 
         public string[] Tags { get; set; } // C#, MainSourceScope, TestSourceScope 
         public IssueLocation[] Locations { get; set; }
+        public Dictionary<string, string> Hashes { get; set; }
     }
 }

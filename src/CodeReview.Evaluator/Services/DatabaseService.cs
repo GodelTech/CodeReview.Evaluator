@@ -218,6 +218,11 @@ namespace GodelTech.CodeReview.Evaluator.Services
             {
                 await SaveTagAsync(connection, issue.Id, tag);
             }
+
+            foreach (var hash in issue.Hashes ?? new Dictionary<string, string>())
+            {
+                await SaveHashAsync(connection, issue.Id, hash.Key, hash.Value);
+            }
         }
 
         private static async Task SaveLocItemAsync(SqliteConnection connection, FileLocDetails details)
@@ -329,6 +334,29 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
             issueLocationCommand.Parameters.AddWithValue("$name", tag);
+
+            await issueLocationCommand.ExecuteNonQueryAsync();
+        }
+
+        private static async Task SaveHashAsync(SqliteConnection connection, long issueId, string algorithmName, string hashValue)
+        {
+            var issueLocationCommand = connection.CreateCommand();
+
+            issueLocationCommand.CommandText = @"INSERT INTO IssueHashes 
+                (
+	                IssueId, 
+	                Algorithm,
+                    Value
+                )
+                VALUES (
+                    $issueId,	
+                    $algorithm,
+                    $value
+                );";
+
+            issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
+            issueLocationCommand.Parameters.AddWithValue("$algorithm", algorithmName);
+            issueLocationCommand.Parameters.AddWithValue("$value", hashValue);
 
             await issueLocationCommand.ExecuteNonQueryAsync();
         }

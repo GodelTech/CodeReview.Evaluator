@@ -44,8 +44,25 @@ CREATE TABLE "IssueTags" (
 			ON DELETE CASCADE
 );
 
+CREATE TABLE "IssueHashes" (
+	"Id"	    INTEGER,
+	"IssueId"	INTEGER,
+	"Algorithm"	TEXT NOT NULL,
+	"Value" 	TEXT NOT NULL,
+	PRIMARY KEY("Id" AUTOINCREMENT),
+	FOREIGN KEY ("IssueId")
+		REFERENCES "Issues" ("Id") 
+			ON DELETE CASCADE
+);
+
 CREATE INDEX "IssueLocations_IssueId"
 	ON "IssueLocations" ("IssueId");
 
 CREATE INDEX "IssueTags_IssueId"
 	ON "IssueTags" ("IssueId");
+
+CREATE INDEX "IssueHashes_IssueId"
+	ON "IssueHashes" ("IssueId");
+
+CREATE INDEX "IssueHashes_Value_Algorithm"
+	ON "IssueHashes" ("Value", "Algorithm");
