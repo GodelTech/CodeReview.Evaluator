@@ -25,7 +25,7 @@ namespace GodelTech.CodeReview.Evaluator
                 x.HelpWriter = TextWriter.Null;
             });
 
-            var result = parser.ParseArguments<EvaluateOptions, ExportDbOptions, NewManifestOptions, NewFilterOptions>(args);
+            var result = parser.ParseArguments<EvaluateOptions, ExportDbOptions, NewManifestOptions, NewFilterOptions, ExtractMetadataOptions>(args);
 
             var exitCode = result
                 .MapResult(
@@ -33,9 +33,15 @@ namespace GodelTech.CodeReview.Evaluator
                     (ExportDbOptions x) => ProcessExportDbAsync(x, container).GetAwaiter().GetResult(),
                     (NewManifestOptions x) => ProcessNewManifestAsync(x, container).GetAwaiter().GetResult(),
                     (NewFilterOptions x) => ProcessNewFilterAsync(x, container).GetAwaiter().GetResult(),
+                    (ExtractMetadataOptions x) => ProcessExtractOptionsAsync(x, container).GetAwaiter().GetResult(),
                     _ => ProcessErrors(result));
 
             return exitCode;
+        }
+
+        private static Task<int> ProcessExtractOptionsAsync(ExtractMetadataOptions options, IServiceProvider container)
+        {
+            return container.GetRequiredService<IExtractMetadataCommand>().ExecuteAsync(options);
         }
 
         private static Task<int> ProcessNewFilterAsync(NewFilterOptions options, IServiceProvider container)
@@ -83,7 +89,6 @@ namespace GodelTech.CodeReview.Evaluator
 
             serviceProvider.AddSingleton<IFileService, FileService>();
             serviceProvider.AddSingleton<IDirectoryService, DirectoryService>();
-            serviceProvider.AddSingleton<IPathService, PathService>();
             serviceProvider.AddSingleton<IYamlSerializer, YamlSerializer>();
             serviceProvider.AddSingleton<IInitScriptProvider, InitScriptProvider>();
             serviceProvider.AddSingleton<IJsonSerializer, JsonSerializer>();
@@ -91,6 +96,8 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IObjectValidator, ObjectValidator>();
             serviceProvider.AddTransient<IScopeManifestValidator, ScopeManifestValidator>();
             serviceProvider.AddTransient<IEvaluationManifestValidator, EvaluationManifestValidator>();
+            serviceProvider.AddTransient<IOptionMetadataProvider, OptionMetadataProvider>();
+            serviceProvider.AddTransient<ICommandLineOptionsTypeProvider, CommandLineOptionsTypeProvider>();
             
             serviceProvider.AddTransient<IDbRequestExecutorFactory, DbRequestExecutorFactory>();
             serviceProvider.AddTransient<IScopeManifestProvider, ScopeManifestProvider>();
@@ -102,6 +109,7 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IDatabaseService, DatabaseService>();
             serviceProvider.AddTransient<IFileListResolver, FileListResolver>();
             serviceProvider.AddTransient<IIssueProvider, IssueProvider>();
+            serviceProvider.AddTransient<IExtractMetadataCommand, ExtractMetadataCommand>();
             serviceProvider.AddTransient<IEvaluateCommand, EvaluateCommand>();
             serviceProvider.AddTransient<IExportDbCommand, ExportDbCommand>();
             serviceProvider.AddTransient<ICreateNewFilterCommand, CreateNewFilterCommand>();
