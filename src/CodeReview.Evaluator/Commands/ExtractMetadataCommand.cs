@@ -10,19 +10,13 @@ namespace GodelTech.CodeReview.Evaluator.Commands
     public class ExtractMetadataCommand : IExtractMetadataCommand
     {
         private readonly IFileService _fileService;
-        private readonly IPathService _pathService;
-        private readonly IDirectoryService _directoryService;
         private readonly IOptionMetadataProvider _optionMetadataProvider;
 
         public ExtractMetadataCommand(
             IFileService fileService, 
-            IPathService pathService, 
-            IDirectoryService directoryService, 
             IOptionMetadataProvider optionMetadataProvider)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-            _pathService = pathService ?? throw new ArgumentNullException(nameof(pathService));
-            _directoryService = directoryService ?? throw new ArgumentNullException(nameof(directoryService));
             _optionMetadataProvider = optionMetadataProvider ?? throw new ArgumentNullException(nameof(optionMetadataProvider));
         } 
 
@@ -32,9 +26,6 @@ namespace GodelTech.CodeReview.Evaluator.Commands
             if (string.IsNullOrWhiteSpace(options.OutputPath)) throw new ArgumentNullException(nameof(options.OutputPath), "Value cannot be null or whitespace.");
 
             var metadata = _optionMetadataProvider.GetOptionsMetadata();
-            var directoryPath = _pathService.GetDirectoryName(options.OutputPath);
-            
-            _directoryService.CreateDirectory(directoryPath);
             
             await _fileService.WriteAllTextAsync(options.OutputPath, metadata);
             
