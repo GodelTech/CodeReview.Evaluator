@@ -91,6 +91,8 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IObjectValidator, ObjectValidator>();
             serviceProvider.AddTransient<IScopeManifestValidator, ScopeManifestValidator>();
             serviceProvider.AddTransient<IEvaluationManifestValidator, EvaluationManifestValidator>();
+            serviceProvider.AddTransient<IOptionMetadataProvider, OptionMetadataProvider>();
+            serviceProvider.AddTransient<ICommandLineOptionsTypeProvider, CommandLineOptionsTypeProvider>();
             
             serviceProvider.AddTransient<IDbRequestExecutorFactory, DbRequestExecutorFactory>();
             serviceProvider.AddTransient<IScopeManifestProvider, ScopeManifestProvider>();
@@ -102,6 +104,7 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IDatabaseService, DatabaseService>();
             serviceProvider.AddTransient<IFileListResolver, FileListResolver>();
             serviceProvider.AddTransient<IIssueProvider, IssueProvider>();
+            serviceProvider.AddTransient<IExtractMetadataCommand, ExtractMetadataCommand>();
             serviceProvider.AddTransient<IEvaluateCommand, EvaluateCommand>();
             serviceProvider.AddTransient<IExportDbCommand, ExportDbCommand>();
             serviceProvider.AddTransient<ICreateNewFilterCommand, CreateNewFilterCommand>();
