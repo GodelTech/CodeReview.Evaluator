@@ -3,8 +3,8 @@ using GodelTech.CodeReview.Evaluator.Options;
 
 namespace GodelTech.CodeReview.Evaluator.Commands
 {
-    public interface IExportDbCommand
+    public interface IImportIssuesCommand
     {
-        Task<int> ExecuteAsync(ExportDbOptions options);
+        Task<int> ExecuteAsync(ImportIssuesOptions options);
     }
 }

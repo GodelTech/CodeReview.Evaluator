@@ -7,6 +7,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IIssueService
     {
-        Task<IEnumerable<Issue>> GetIssuesAsync(IssueProcessingOptionsBase options);
+        Task<IEnumerable<Issue>> GetIssuesAsync(ImportIssuesOptions options);
     }
 }

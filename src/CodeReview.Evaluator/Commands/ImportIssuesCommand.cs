@@ -7,60 +7,58 @@ using Microsoft.Extensions.Logging;
 
 namespace GodelTech.CodeReview.Evaluator.Commands
 {
-    public class ExportDbCommand : IExportDbCommand
+    public class ImportIssuesCommand : IImportIssuesCommand
     {
         private readonly IDatabaseService _databaseService;
         private readonly IFileService _fileService;
         private readonly IIssueService _issueService;
-        private readonly IFileLocDetailsProvider _locDetailsProvider;
-        private readonly ILogger<ExportDbCommand> _logger;
+        private readonly ILogger<ImportFileDetailsCommand> _logger;
 
-        public ExportDbCommand(
+        public ImportIssuesCommand(
             IDatabaseService databaseService,
             IFileService fileService,
             IIssueService issueService,
-            IFileLocDetailsProvider locDetailsProvider,
-            ILogger<ExportDbCommand> logger)
+            ILogger<ImportFileDetailsCommand> logger)
         {
             _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
             _issueService = issueService ?? throw new ArgumentNullException(nameof(issueService));
-            _locDetailsProvider = locDetailsProvider ?? throw new ArgumentNullException(nameof(locDetailsProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
-        
-        public async Task<int> ExecuteAsync(ExportDbOptions options)
+
+        public async Task<int> ExecuteAsync(ImportIssuesOptions options)
         {
-            if (options == null) 
+            if (options == null)
                 throw new ArgumentNullException(nameof(options));
 
-            if (_fileService.Exists(options.OutputPath))
-                _fileService.Delete(options.OutputPath);
-            
-            _logger.LogInformation("Creating database. File = {filePath}", options.OutputPath);
-            
-            await _databaseService.CreateDbAsync(options.OutputPath);
-
-            _logger.LogInformation("Database created");
-            
-            _logger.LogInformation("Loading file LOC statistics...");
-
-            var details = await _locDetailsProvider.GetDetailsAsync(options);
-            await _databaseService.SaveLocDetailsAsync(options.OutputPath, details);
-            
-            _logger.LogInformation("LOC statistics loaded");
+            await EnsureDatabaseExistsAsync(options);
 
             _logger.LogInformation("Persisting issues...");
 
             var issues = await _issueService.GetIssuesAsync(options);
-            
+
             await _databaseService.SaveIssuesAsync(
-                options.OutputPath,
+                options.OutputFilePath,
                 issues);
-            
+
             _logger.LogInformation("Issues persisted");
 
             return Constants.SuccessExitCode;
+        }
+
+        private async Task EnsureDatabaseExistsAsync(ImportIssuesOptions options)
+        {
+            if (_fileService.Exists(options.OutputFilePath))
+            {
+                _logger.LogWarning("Specified file exists. Adding data into existing file.");
+                return;
+            }
+
+            _logger.LogInformation("Creating database. File = {filePath}", options.OutputFilePath);
+
+            await _databaseService.CreateDbAsync(options.OutputFilePath);
+
+            _logger.LogInformation("Database created");
         }
     }
 }

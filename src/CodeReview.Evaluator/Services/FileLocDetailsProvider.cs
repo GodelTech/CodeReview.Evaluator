@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GodelTech.CodeReview.Evaluator.Models;
-using GodelTech.CodeReview.Evaluator.Options;
 using Microsoft.Extensions.Logging;
 
 namespace GodelTech.CodeReview.Evaluator.Services
