@@ -6,6 +6,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IFileLocDetailsProvider
     {
-        Task<FileLocDetails[]> GetDetailsAsync(IssueProcessingOptionsBase options);
+        Task<FileLocDetails[]> GetDetailsAsync(ImportFileDetailsOptions options);
     }
 }

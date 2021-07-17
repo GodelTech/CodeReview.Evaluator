@@ -113,7 +113,6 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IIssueFilterFactory, IssueFilterFactory>();
             serviceProvider.AddTransient<IEvaluationService, EvaluationService>();
             serviceProvider.AddTransient<IDatabaseService, DatabaseService>();
-            serviceProvider.AddTransient<IFileListResolver, FileListResolver>();
             serviceProvider.AddTransient<IIssueProvider, IssueProvider>();
             
             serviceProvider.AddTransient<IExtractMetadataCommand, ExtractMetadataCommand>();

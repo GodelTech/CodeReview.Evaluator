@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GodelTech.CodeReview.Evaluator.Models;
+using GodelTech.CodeReview.Evaluator.Options;
 using Microsoft.Extensions.Logging;
 
 namespace GodelTech.CodeReview.Evaluator.Services
@@ -29,24 +30,24 @@ namespace GodelTech.CodeReview.Evaluator.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         
-        public async Task<FileLocDetails[]> GetDetailsAsync(IssueProcessingOptionsBase options)
+        public async Task<FileLocDetails[]> GetDetailsAsync(ImportFileDetailsOptions options)
         {
             if (options == null) 
                 throw new ArgumentNullException(nameof(options));
 
-            if (string.IsNullOrWhiteSpace(options.LocFilePath))
+            if (string.IsNullOrWhiteSpace(options.FileDetailsFilePath))
             {
-                _logger.LogWarning("LOC statistics was not provided");
+                _logger.LogWarning("File details file was not provided");
                 return Array.Empty<FileLocDetails>();
             }
 
-            if (!_fileService.Exists(options.LocFilePath))
+            if (!_fileService.Exists(options.FileDetailsFilePath))
             {
-                _logger.LogWarning("LOC statistics file was not fount. File = {filePath}", options.LocFilePath);
+                _logger.LogWarning("File details file was not found. File = {filePath}", options.FileDetailsFilePath);
                 return Array.Empty<FileLocDetails>();
             }
 
-            var fileContent = await _fileService.ReadAllTextAsync(options.LocFilePath);
+            var fileContent = await _fileService.ReadAllTextAsync(options.FileDetailsFilePath);
             var data = _jsonSerializer.Deserialize<Dictionary<string, LocModel>>(fileContent);
 
             var items =
@@ -61,13 +62,13 @@ namespace GodelTech.CodeReview.Evaluator.Services
                     })
                 .ToArray();
 
-            var manifest = await _manifestProvider.GetScopeManifestAsync(options.ScopeFilePath);
+            var manifest = await _manifestProvider.GetScopeManifestAsync(options.FilterManifestPath);
             if (manifest == null)
                 return items;
 
             var filter = _filterFactory.Create(manifest);
             
-            _logger.LogInformation("Applying scope manifest. File = {filePath}", options.ScopeFilePath);
+            _logger.LogInformation("Applying scope manifest. File = {filePath}", options.FilterManifestPath);
 
             return items.Where(filter.IsMatch).ToArray();
         }

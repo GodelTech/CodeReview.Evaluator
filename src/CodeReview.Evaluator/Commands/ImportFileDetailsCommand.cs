@@ -11,20 +11,17 @@ namespace GodelTech.CodeReview.Evaluator.Commands
     {
         private readonly IDatabaseService _databaseService;
         private readonly IFileService _fileService;
-        private readonly IIssueService _issueService;
         private readonly IFileLocDetailsProvider _locDetailsProvider;
         private readonly ILogger<ImportFileDetailsCommand> _logger;
 
         public ImportFileDetailsCommand(
             IDatabaseService databaseService,
             IFileService fileService,
-            IIssueService issueService,
             IFileLocDetailsProvider locDetailsProvider,
             ILogger<ImportFileDetailsCommand> logger)
         {
             _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-            _issueService = issueService ?? throw new ArgumentNullException(nameof(issueService));
             _locDetailsProvider = locDetailsProvider ?? throw new ArgumentNullException(nameof(locDetailsProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -34,33 +31,32 @@ namespace GodelTech.CodeReview.Evaluator.Commands
             if (options == null) 
                 throw new ArgumentNullException(nameof(options));
 
-            if (_fileService.Exists(options.OutputPath))
-                _fileService.Delete(options.OutputPath);
-            
-            _logger.LogInformation("Creating database. File = {filePath}", options.OutputPath);
-            
-            await _databaseService.CreateDbAsync(options.OutputPath);
+            await EnsureDatabaseExistsAsync(options);
 
-            _logger.LogInformation("Database created");
-            
-            _logger.LogInformation("Loading file LOC statistics...");
+            _logger.LogInformation("Loading file details information ...");
 
             var details = await _locDetailsProvider.GetDetailsAsync(options);
-            await _databaseService.SaveLocDetailsAsync(options.OutputPath, details);
+            await _databaseService.SaveLocDetailsAsync(options.OutputFilePath, details);
             
-            _logger.LogInformation("LOC statistics loaded");
-
-            _logger.LogInformation("Persisting issues...");
-
-            var issues = await _issueService.GetIssuesAsync(options);
-            
-            await _databaseService.SaveIssuesAsync(
-                options.OutputPath,
-                issues);
-            
-            _logger.LogInformation("Issues persisted");
+            _logger.LogInformation("File details information loaded");
 
             return Constants.SuccessExitCode;
+        }
+
+        private async Task EnsureDatabaseExistsAsync(ImportFileDetailsOptions options)
+        {
+            if (_fileService.Exists(options.OutputFilePath))
+            {
+                _logger.LogWarning("Database already exists. Data is added to existing database.");
+            }
+            else
+            {
+                _logger.LogInformation("Creating database. File = {filePath}", options.OutputFilePath);
+
+                await _databaseService.CreateDbAsync(options.OutputFilePath);
+
+                _logger.LogInformation("Database created");
+            }
         }
     }
 }
