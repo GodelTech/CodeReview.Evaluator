@@ -15,6 +15,9 @@ namespace GodelTech.CodeReview.Evaluator.Services
         private const string ColumnNameField = "ColumnName";
         private const string ParameterNamePrefix = "$";
 
+        private static readonly Dictionary<string, string> EmptyDictionary = new();
+
+
         private readonly IInitScriptProvider _scriptProvider;
 
         public DatabaseService(IInitScriptProvider scriptProvider)
@@ -30,10 +33,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
             var result = await ExecuteScalarAsync(dbFilePath,
-                @"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=@TableName",
+                @"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=$TableName",
                 new Dictionary<string, object>
                 {
-                    ["TableName"] = tableName
+                    ["$TableName"] = tableName
                 });
 
             return (bool) result;
@@ -247,10 +250,38 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 await SaveTagAsync(connection, issue.Id, tag);
             }
 
-            foreach (var hash in issue.Hashes ?? new Dictionary<string, string>())
+            foreach (var hash in issue.Hashes ?? EmptyDictionary)
             {
                 await SaveHashAsync(connection, issue.Id, hash.Key, hash.Value);
             }
+
+            foreach (var property in issue.Hashes ?? EmptyDictionary)
+            {
+                await SavePropertyAsync(connection, issue.Id, property.Key, property.Value);
+            }
+        }
+
+        private static async Task SavePropertyAsync(SqliteConnection connection, long issueId, string name, string value)
+        {
+            var issueLocationCommand = connection.CreateCommand();
+
+            issueLocationCommand.CommandText = @"INSERT INTO IssueProperties 
+                (
+	                IssueId, 
+	                Property,
+                    Value
+                )
+                VALUES (
+                    $issueId,	
+                    $property,
+                    $value
+                );";
+
+            issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
+            issueLocationCommand.Parameters.AddWithValue("$property", name);
+            issueLocationCommand.Parameters.AddWithValue("$value", value);
+
+            await issueLocationCommand.ExecuteNonQueryAsync();
         }
 
         private static async Task SaveLocItemAsync(SqliteConnection connection, FileLocDetails details)

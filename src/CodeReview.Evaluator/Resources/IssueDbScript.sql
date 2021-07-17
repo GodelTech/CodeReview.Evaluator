@@ -43,6 +43,18 @@ CREATE TABLE "IssueHashes" (
 			ON DELETE CASCADE
 );
 
+
+CREATE TABLE "IssueProperties" (
+	"Id"	    INTEGER,
+	"IssueId"	INTEGER,
+	"Property"	TEXT NOT NULL,
+	"Value" 	TEXT NOT NULL,
+	PRIMARY KEY("Id" AUTOINCREMENT),
+	FOREIGN KEY ("IssueId")
+		REFERENCES "Issues" ("Id") 
+			ON DELETE CASCADE
+);
+
 CREATE INDEX "IssueLocations_IssueId"
 	ON "IssueLocations" ("IssueId");
 
@@ -54,3 +66,6 @@ CREATE INDEX "IssueHashes_IssueId"
 
 CREATE INDEX "IssueHashes_Value_Algorithm"
 	ON "IssueHashes" ("Value", "Algorithm");
+
+CREATE INDEX "IssueProperties_Property"
+	ON "IssueProperties" ("Property");
