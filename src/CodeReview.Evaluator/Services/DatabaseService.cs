@@ -9,6 +9,9 @@ namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class DatabaseService : IDatabaseService
     {
+        internal const string IssuesTableName = "Issues";
+        internal const string FileDetailsTableName = "FileDetails";
+        
         private const string ColumnNameField = "ColumnName";
         private const string ParameterNamePrefix = "$";
 
@@ -19,12 +22,37 @@ namespace GodelTech.CodeReview.Evaluator.Services
             _scriptProvider = scriptProvider ?? throw new ArgumentNullException(nameof(scriptProvider));
         }
 
-        public async Task CreateDbAsync(string dbFilePath)
+        public async Task<bool> DoesTableExist(string dbFilePath, string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(tableName));
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            var result = await ExecuteScalarAsync(dbFilePath,
+                @"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=@TableName",
+                new Dictionary<string, object>
+                {
+                    ["TableName"] = tableName
+                });
+
+            return (bool) result;
+        }
+
+        public async Task CreateFileDetailsDbAsync(string dbFilePath)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
-            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, object>());
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetFileDetailsDbScript(), new Dictionary<string, object>());
+        }
+
+        public async Task CreateIssuesDbAsync(string dbFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetIssuesDbScript(), new Dictionary<string, object>());
         }
 
         public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)

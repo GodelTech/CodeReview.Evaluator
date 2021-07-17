@@ -48,17 +48,27 @@ namespace GodelTech.CodeReview.Evaluator.Commands
 
         private async Task EnsureDatabaseExistsAsync(ImportIssuesOptions options)
         {
-            if (_fileService.Exists(options.OutputFilePath))
+            if (!_fileService.Exists(options.OutputFilePath))
             {
-                _logger.LogWarning("Specified file exists. Adding data into existing file.");
+                _logger.LogInformation("Creating database. File = {filePath}", options.OutputFilePath);
+
+                await _databaseService.CreateFileDetailsDbAsync(options.OutputFilePath);
+
+                _logger.LogInformation("Database created");
                 return;
             }
 
-            _logger.LogInformation("Creating database. File = {filePath}", options.OutputFilePath);
+            var tableExists = await _databaseService.DoesTableExist(options.OutputFilePath, DatabaseService.IssuesTableName);
 
-            await _databaseService.CreateDbAsync(options.OutputFilePath);
+            if (tableExists)
+            {
+                _logger.LogWarning("Specified file exists. {TableName} table exists.", DatabaseService.IssuesTableName);
+                return;
+            }
 
-            _logger.LogInformation("Database created");
+            _logger.LogWarning("Specified file exists. {TableName} table was not found. Creating tables.", DatabaseService.IssuesTableName);
+
+            await _databaseService.CreateIssuesDbAsync(options.OutputFilePath);
         }
     }
 }

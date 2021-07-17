@@ -2,6 +2,7 @@
 {
     public interface IInitScriptProvider
     {
-        string GetDbInitScript();
+        string GetIssuesDbScript();
+        string GetFileDetailsDbScript();
     }
 }

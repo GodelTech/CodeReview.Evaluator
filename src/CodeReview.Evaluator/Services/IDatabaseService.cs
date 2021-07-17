@@ -6,7 +6,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
 {
     public interface IDatabaseService
     {
-        Task CreateDbAsync(string dbFilePath);
+        Task<bool> DoesTableExist(string dbFilePath, string tableName);
+
+        Task CreateFileDetailsDbAsync(string dbFilePath);
+        Task CreateIssuesDbAsync(string dbFilePath);
         Task SaveIssuesAsync(string dbFilePath, IEnumerable<Issue> issues);
         Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items);
 
