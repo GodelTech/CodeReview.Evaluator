@@ -8,10 +8,10 @@ namespace GodelTech.CodeReview.Evaluator.Options
         [Option('d', "db", Required = true, HelpText = "Database file path.")]
         public string DbFilePath { get; set; }
 
-        [Option('m', "manifest", Required = true, HelpText = "Evaluation manifest file path.")]
-        public string FilterManifestPath { get; set; }
-
         [Option('o', "output", Required = true, HelpText = "Output file path for JSON document.")]
         public string OutputFilePath { get; set; }
+
+        [Option('m', "manifest", Required = true, HelpText = "Evaluation manifest file path.")]
+        public string ManifestFilePath { get; set; }
     }
 }
