@@ -7,7 +7,7 @@
 	"Description"	TEXT,
 	"DetailsUrl"	TEXT,
 	"Category"	TEXT,
-	PRIMARY KEY("Id")
+	PRIMARY KEY("Id"  AUTOINCREMENT)
 );
 
 CREATE TABLE "IssueLocations" (

@@ -1,12 +1,16 @@
 {
   "profiles": {
-    "CodeReview.Evaluator - Export": {
+    "CodeReview.Evaluator - Import Issues": {
       "commandName": "Project",
-      "commandLineArgs": "export-db -o result.db  -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+      "commandLineArgs": "import-issues -o result.db  -i ../../../../../docs/data/resharper-result.zip -f ../../../../../docs/manifests/filter.yaml"
+    },
+    "CodeReview.Evaluator - Import File Details": {
+      "commandName": "Project",
+      "commandLineArgs": "import-file-details -o result.db -d ../../../../../docs/data/file-stat.json -f ../../../../../docs/manifests/filter.yaml"
     },
     "CodeReview.Evaluator - Evaluate": {
       "commandName": "Project",
-      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -f ../../../../../docs/data/resharper-result.zip -s ../../../../../docs/manifests/filter.yaml -l ../../../../../docs/data/file-stat.json"
+      "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -d ../../../../../docs/data/issues.db"
     }
   }
 }

@@ -36,10 +36,10 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 @"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=$TableName",
                 new Dictionary<string, object>
                 {
-                    ["$TableName"] = tableName
+                    ["TableName"] = tableName
                 });
 
-            return (bool) result;
+            return (long)result > 0;
         }
 
         public async Task CreateFileDetailsDbAsync(string dbFilePath)
@@ -238,26 +238,26 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         private static async Task SaveEntityAsync(SqliteConnection connection, Issue issue)
         {
-            await SaveIssueAsync(connection, issue);
+            var issueId = await SaveIssueAsync(connection, issue);
 
             foreach (var location in issue.Locations ?? Array.Empty<IssueLocation>())
             {
-                await SaveLocationAsync(connection, issue, location);
+                await SaveLocationAsync(connection, issueId, location);
             }
 
             foreach (var tag in issue.Tags ?? Array.Empty<string>())
             {
-                await SaveTagAsync(connection, issue.Id, tag);
+                await SaveTagAsync(connection, issueId, tag);
             }
 
             foreach (var hash in issue.Hashes ?? EmptyDictionary)
             {
-                await SaveHashAsync(connection, issue.Id, hash.Key, hash.Value);
+                await SaveHashAsync(connection, issueId, hash.Key, hash.Value);
             }
 
             foreach (var property in issue.Hashes ?? EmptyDictionary)
             {
-                await SavePropertyAsync(connection, issue.Id, property.Key, property.Value);
+                await SavePropertyAsync(connection, issueId, property.Key, property.Value);
             }
         }
 
@@ -313,13 +313,12 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await issueCommand.ExecuteNonQueryAsync();
         }
 
-        private static async Task SaveIssueAsync(SqliteConnection connection, Issue issue)
+        private static async Task<long> SaveIssueAsync(SqliteConnection connection, Issue issue)
         {
             var issueCommand = connection.CreateCommand();
 
             issueCommand.CommandText = @"INSERT INTO Issues 
             (
-	            Id, 
 	            RuleId,
 	            Level,
                 Title,
@@ -329,7 +328,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
 	            Category
             )
             VALUES (
-                $id,	
                 $ruleId,
                 $level,
                 $title,
@@ -339,7 +337,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 $category
             );";
 
-            issueCommand.Parameters.AddWithValue("$id", issue.Id);
             issueCommand.Parameters.AddWithValue("$ruleId", issue.RuleId);
             issueCommand.Parameters.AddWithValue("$level", issue.Level);
             issueCommand.Parameters.AddWithValue("$title", issue.Title);
@@ -349,9 +346,18 @@ namespace GodelTech.CodeReview.Evaluator.Services
             issueCommand.Parameters.AddWithValue("$category", (object) issue.Category ?? DBNull.Value);
 
             await issueCommand.ExecuteNonQueryAsync();
+
+
+            var identityCommand = connection.CreateCommand();
+
+            identityCommand.CommandText = "SELECT last_insert_rowid()";
+            
+            var issueId = await identityCommand.ExecuteScalarAsync();
+
+            return (long)issueId;
         }
 
-        private static async Task SaveLocationAsync(SqliteConnection connection, Issue issue, IssueLocation location)
+        private static async Task SaveLocationAsync(SqliteConnection connection, long issueId, IssueLocation location)
         {
             var issueLocationCommand = connection.CreateCommand();
 
@@ -369,7 +375,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                     $endLine	
                 );";
 
-            issueLocationCommand.Parameters.AddWithValue("$issueId", issue.Id);
+            issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
             issueLocationCommand.Parameters.AddWithValue("$filePath", location.FilePath);
             issueLocationCommand.Parameters.AddWithValue("$startLine", (object) location.Region?.StartLine ?? DBNull.Value);
             issueLocationCommand.Parameters.AddWithValue("$endLine", (object) location.Region?.EndLine ?? DBNull.Value);

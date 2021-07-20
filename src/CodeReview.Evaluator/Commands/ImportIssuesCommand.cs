@@ -52,7 +52,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
             {
                 _logger.LogInformation("Creating database. File = {filePath}", options.OutputFilePath);
 
-                await _databaseService.CreateFileDetailsDbAsync(options.OutputFilePath);
+                await _databaseService.CreateIssuesDbAsync(options.OutputFilePath);
 
                 _logger.LogInformation("Database created");
                 return;
