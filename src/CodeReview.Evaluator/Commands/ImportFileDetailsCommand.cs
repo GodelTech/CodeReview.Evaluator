@@ -66,7 +66,7 @@ namespace GodelTech.CodeReview.Evaluator.Commands
 
             _logger.LogWarning("Specified file exists. {TableName} table was not found. Creating tables.", DatabaseService.FileDetailsTableName);
 
-            await _databaseService.CreateIssuesDbAsync(options.OutputFilePath);
+            await _databaseService.CreateFileDetailsDbAsync(options.OutputFilePath);
         }
     }
 }
