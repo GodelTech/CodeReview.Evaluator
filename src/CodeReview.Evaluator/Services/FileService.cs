@@ -24,11 +24,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
             return File.WriteAllTextAsync(path, text);
         }
 
-        public FileStream Create(string path)
-        {
-            return File.Create(path);
-        }
-
         public FileStream OpenRead(string path)
         {
             return File.OpenRead(path);
@@ -37,41 +32,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
         public bool Exists(string path)
         {
             return File.Exists(path);
-        }
-
-        public void Delete(string path)
-        {
-            File.Delete(path);
-        }
-
-        public ITempFile CreateTempFile()
-        {
-            var tempFilePath = Path.GetTempFileName();
-
-            return new TempFile(tempFilePath, () => File.Delete(tempFilePath));
-        }
-    }
-
-
-    public class TempFile : ITempFile
-    {
-        private readonly Action _onDispose;
-
-        public string FilePath { get; }
-
-        public TempFile(string filePath, Action onDispose)
-        {
-            if (string.IsNullOrWhiteSpace(filePath))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
-
-            FilePath = filePath;
-            
-            _onDispose = onDispose ?? throw new ArgumentNullException(nameof(onDispose));
-        }
-
-        void IDisposable.Dispose()
-        {
-            _onDispose();
         }
     }
 }

@@ -94,7 +94,6 @@ namespace GodelTech.CodeReview.Evaluator
             });
 
             serviceProvider.AddSingleton<IFileService, FileService>();
-            serviceProvider.AddSingleton<IDirectoryService, DirectoryService>();
             serviceProvider.AddSingleton<IYamlSerializer, YamlSerializer>();
             serviceProvider.AddSingleton<IInitScriptProvider, InitScriptProvider>();
             serviceProvider.AddSingleton<IJsonSerializer, JsonSerializer>();
