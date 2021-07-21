@@ -15,5 +15,6 @@ namespace GodelTech.CodeReview.Evaluator.Models
         public string[] Tags { get; set; } // C#, MainSourceScope, TestSourceScope 
         public IssueLocation[] Locations { get; set; }
         public Dictionary<string, string> Hashes { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
     }
 }

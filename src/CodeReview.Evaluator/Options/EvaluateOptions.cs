@@ -2,10 +2,16 @@
 
 namespace GodelTech.CodeReview.Evaluator.Options
 {
-    [Verb("evaluate", HelpText = "Create issue summary using provided manifest.")]
-    public class EvaluateOptions : IssueProcessingOptionsBase
+    [Verb("evaluate", HelpText = "Executes SQL queries against provided database using specified manifest.")]
+    public class EvaluateOptions
     {
-        [Option('m', "manifest", Required = true, HelpText = "Manifest file path")]
+        [Option('d', "db", Required = true, HelpText = "Database file path.")]
+        public string DbFilePath { get; set; }
+
+        [Option('o', "output", Required = true, HelpText = "Output file path for JSON document.")]
+        public string OutputFilePath { get; set; }
+
+        [Option('m', "manifest", Required = true, HelpText = "Evaluation manifest file path.")]
         public string ManifestFilePath { get; set; }
     }
 }

@@ -10,31 +10,22 @@ namespace GodelTech.CodeReview.Evaluator.Commands
     public class EvaluateCommand : IEvaluateCommand
     {
         private readonly IFileService _fileService;
-        private readonly IDatabaseService _databaseService;
         private readonly IEvaluationService _evaluationService;
         private readonly IYamlSerializer _yamlSerializer;
         private readonly IEvaluationManifestValidator _evaluationManifestValidator;
-        private readonly IIssueService _issueService;
-        private readonly IFileLocDetailsProvider _locDetailsProvider;
         private readonly ILogger<EvaluateCommand> _logger;
 
         public EvaluateCommand(
             IFileService fileService,
-            IDatabaseService databaseService,
             IEvaluationService evaluationService,
             IYamlSerializer yamlSerializer,
             IEvaluationManifestValidator evaluationManifestValidator,
-            IIssueService issueService,
-            IFileLocDetailsProvider locDetailsProvider,
             ILogger<EvaluateCommand> logger)
         {
             _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-            _databaseService = databaseService ?? throw new ArgumentNullException(nameof(databaseService));
             _evaluationService = evaluationService ?? throw new ArgumentNullException(nameof(evaluationService));
             _yamlSerializer = yamlSerializer ?? throw new ArgumentNullException(nameof(yamlSerializer));
             _evaluationManifestValidator = evaluationManifestValidator ?? throw new ArgumentNullException(nameof(evaluationManifestValidator));
-            _issueService = issueService ?? throw new ArgumentNullException(nameof(issueService));
-            _locDetailsProvider = locDetailsProvider ?? throw new ArgumentNullException(nameof(locDetailsProvider));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         
@@ -60,35 +51,18 @@ namespace GodelTech.CodeReview.Evaluator.Commands
 
             _logger.LogInformation("Manifest validated");
 
-            var issues = await _issueService.GetIssuesAsync(options);
-
-            using var file = _fileService.CreateTempFile();
-
-            _logger.LogInformation("Creating database...");
-
-            await _databaseService.CreateDbAsync(file.FilePath);
-
-            _logger.LogInformation("Database created");
-
-            _logger.LogInformation("Loading file LOC statistics...");
-
-            var details = await _locDetailsProvider.GetDetailsAsync(options);
-            await _databaseService.SaveLocDetailsAsync(file.FilePath, details);
-
-            _logger.LogInformation("LOC statistics loaded");
-
-            _logger.LogInformation("Persisting issues...");
-
-            await _databaseService.SaveIssuesAsync(file.FilePath, issues);
-
-            _logger.LogInformation("Issues persisted");
+            if (!_fileService.Exists(options.DbFilePath))
+            {
+                _logger.LogError("Failed to validate evaluation manifest");
+                return Constants.ErrorExitCode;
+            }
 
             _logger.LogInformation("Running queries from manifest...");
 
             await _evaluationService.EvaluateAsync(
                 evaluationScopeManifest,
-                file.FilePath,
-                options.OutputPath);
+                options.DbFilePath,
+                options.OutputFilePath);
             
             _logger.LogInformation("Query execution completed");
 

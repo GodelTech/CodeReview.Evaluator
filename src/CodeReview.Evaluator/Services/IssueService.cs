@@ -14,13 +14,13 @@ namespace GodelTech.CodeReview.Evaluator.Services
         private readonly IIssueProvider _issueProvider;
         private readonly IIssueFilterFactory _filterFactory;
         private readonly IScopeManifestProvider _manifestProvider;
-        private readonly ILogger<ExportDbCommand> _logger;
+        private readonly ILogger<ImportFileDetailsCommand> _logger;
 
         public IssueService(
             IIssueProvider issueProvider,
             IIssueFilterFactory filterFactory,
             IScopeManifestProvider manifestProvider,
-            ILogger<ExportDbCommand> logger)
+            ILogger<ImportFileDetailsCommand> logger)
         {
             _issueProvider = issueProvider ?? throw new ArgumentNullException(nameof(issueProvider));
             _filterFactory = filterFactory ?? throw new ArgumentNullException(nameof(filterFactory));
@@ -28,15 +28,15 @@ namespace GodelTech.CodeReview.Evaluator.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<IEnumerable<Issue>> GetIssuesAsync(IssueProcessingOptionsBase options)
+        public async Task<IEnumerable<Issue>> GetIssuesAsync(ImportIssuesOptions options)
         {
-            var manifest = await _manifestProvider.GetScopeManifestAsync(options.ScopeFilePath);
+            var manifest = await _manifestProvider.GetScopeManifestAsync(options.FilterManifestPath);
 
-            var allIssues = _issueProvider.ReadAllIssues(options);
+            var allIssues = _issueProvider.ReadAllIssues(options.IssuesFilePath);
             if (manifest == null)
                 return allIssues;
 
-            _logger.LogInformation("Applying scope manifest. File = {filePath}", options.ScopeFilePath);
+            _logger.LogInformation("Applying scope manifest. File = {filePath}", options.FilterManifestPath);
             
             var filter = _filterFactory.Create(manifest);
             return allIssues.Where(filter.IsMatch);

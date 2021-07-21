@@ -9,11 +9,13 @@
   <ItemGroup>
     <None Remove="Commands\CreateNewFilterCommand.cs~RF3344ca59.TMP" />
     <None Remove="Commands\CreateNewManifestCommand.cs~RF331f361c.TMP" />
-    <None Remove="Resources\CreateDatabase.sql" />
+    <None Remove="Resources\FileDetailsDbScript.sql" />
+    <None Remove="Resources\IssueDbScript.sql" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\CreateDatabase.sql" />
+    <EmbeddedResource Include="Resources\IssueDbScript.sql" />
+    <EmbeddedResource Include="Resources\FileDetailsDbScript.sql" />
   </ItemGroup>
 
   <ItemGroup>

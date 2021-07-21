@@ -9,8 +9,14 @@ namespace GodelTech.CodeReview.Evaluator.Services
 {
     public class DatabaseService : IDatabaseService
     {
+        internal const string IssuesTableName = "Issues";
+        internal const string FileDetailsTableName = "FileDetails";
+        
         private const string ColumnNameField = "ColumnName";
         private const string ParameterNamePrefix = "$";
+
+        private static readonly Dictionary<string, string> EmptyDictionary = new();
+
 
         private readonly IInitScriptProvider _scriptProvider;
 
@@ -19,12 +25,37 @@ namespace GodelTech.CodeReview.Evaluator.Services
             _scriptProvider = scriptProvider ?? throw new ArgumentNullException(nameof(scriptProvider));
         }
 
-        public async Task CreateDbAsync(string dbFilePath)
+        public async Task<bool> DoesTableExist(string dbFilePath, string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(tableName));
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            var result = await ExecuteScalarAsync(dbFilePath,
+                @"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=$TableName",
+                new Dictionary<string, object>
+                {
+                    ["TableName"] = tableName
+                });
+
+            return (long)result > 0;
+        }
+
+        public async Task CreateFileDetailsDbAsync(string dbFilePath)
         {
             if (string.IsNullOrWhiteSpace(dbFilePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
 
-            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetDbInitScript(), new Dictionary<string, object>());
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetFileDetailsDbScript(), new Dictionary<string, object>());
+        }
+
+        public async Task CreateIssuesDbAsync(string dbFilePath)
+        {
+            if (string.IsNullOrWhiteSpace(dbFilePath))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(dbFilePath));
+
+            await ExecuteNonQueryAsync(dbFilePath, _scriptProvider.GetIssuesDbScript(), new Dictionary<string, object>());
         }
 
         public async Task SaveLocDetailsAsync(string dbFilePath, FileLocDetails[] items)
@@ -207,22 +238,50 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         private static async Task SaveEntityAsync(SqliteConnection connection, Issue issue)
         {
-            await SaveIssueAsync(connection, issue);
+            var issueId = await SaveIssueAsync(connection, issue);
 
             foreach (var location in issue.Locations ?? Array.Empty<IssueLocation>())
             {
-                await SaveLocationAsync(connection, issue, location);
+                await SaveLocationAsync(connection, issueId, location);
             }
 
             foreach (var tag in issue.Tags ?? Array.Empty<string>())
             {
-                await SaveTagAsync(connection, issue.Id, tag);
+                await SaveTagAsync(connection, issueId, tag);
             }
 
-            foreach (var hash in issue.Hashes ?? new Dictionary<string, string>())
+            foreach (var hash in issue.Hashes ?? EmptyDictionary)
             {
-                await SaveHashAsync(connection, issue.Id, hash.Key, hash.Value);
+                await SaveHashAsync(connection, issueId, hash.Key, hash.Value);
             }
+
+            foreach (var property in issue.Hashes ?? EmptyDictionary)
+            {
+                await SavePropertyAsync(connection, issueId, property.Key, property.Value);
+            }
+        }
+
+        private static async Task SavePropertyAsync(SqliteConnection connection, long issueId, string name, string value)
+        {
+            var issueLocationCommand = connection.CreateCommand();
+
+            issueLocationCommand.CommandText = @"INSERT INTO IssueProperties 
+                (
+	                IssueId, 
+	                Property,
+                    Value
+                )
+                VALUES (
+                    $issueId,	
+                    $property,
+                    $value
+                );";
+
+            issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
+            issueLocationCommand.Parameters.AddWithValue("$property", name);
+            issueLocationCommand.Parameters.AddWithValue("$value", value);
+
+            await issueLocationCommand.ExecuteNonQueryAsync();
         }
 
         private static async Task SaveLocItemAsync(SqliteConnection connection, FileLocDetails details)
@@ -254,13 +313,12 @@ namespace GodelTech.CodeReview.Evaluator.Services
             await issueCommand.ExecuteNonQueryAsync();
         }
 
-        private static async Task SaveIssueAsync(SqliteConnection connection, Issue issue)
+        private static async Task<long> SaveIssueAsync(SqliteConnection connection, Issue issue)
         {
             var issueCommand = connection.CreateCommand();
 
             issueCommand.CommandText = @"INSERT INTO Issues 
             (
-	            Id, 
 	            RuleId,
 	            Level,
                 Title,
@@ -270,7 +328,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
 	            Category
             )
             VALUES (
-                $id,	
                 $ruleId,
                 $level,
                 $title,
@@ -280,7 +337,6 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 $category
             );";
 
-            issueCommand.Parameters.AddWithValue("$id", issue.Id);
             issueCommand.Parameters.AddWithValue("$ruleId", issue.RuleId);
             issueCommand.Parameters.AddWithValue("$level", issue.Level);
             issueCommand.Parameters.AddWithValue("$title", issue.Title);
@@ -290,9 +346,18 @@ namespace GodelTech.CodeReview.Evaluator.Services
             issueCommand.Parameters.AddWithValue("$category", (object) issue.Category ?? DBNull.Value);
 
             await issueCommand.ExecuteNonQueryAsync();
+
+
+            var identityCommand = connection.CreateCommand();
+
+            identityCommand.CommandText = "SELECT last_insert_rowid()";
+            
+            var issueId = await identityCommand.ExecuteScalarAsync();
+
+            return (long)issueId;
         }
 
-        private static async Task SaveLocationAsync(SqliteConnection connection, Issue issue, IssueLocation location)
+        private static async Task SaveLocationAsync(SqliteConnection connection, long issueId, IssueLocation location)
         {
             var issueLocationCommand = connection.CreateCommand();
 
@@ -310,7 +375,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                     $endLine	
                 );";
 
-            issueLocationCommand.Parameters.AddWithValue("$issueId", issue.Id);
+            issueLocationCommand.Parameters.AddWithValue("$issueId", issueId);
             issueLocationCommand.Parameters.AddWithValue("$filePath", location.FilePath);
             issueLocationCommand.Parameters.AddWithValue("$startLine", (object) location.Region?.StartLine ?? DBNull.Value);
             issueLocationCommand.Parameters.AddWithValue("$endLine", (object) location.Region?.EndLine ?? DBNull.Value);

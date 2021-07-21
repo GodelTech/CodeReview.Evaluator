@@ -25,18 +25,29 @@ namespace GodelTech.CodeReview.Evaluator
                 x.HelpWriter = TextWriter.Null;
             });
 
-            var result = parser.ParseArguments<EvaluateOptions, ExportDbOptions, NewManifestOptions, NewFilterOptions, ExtractMetadataOptions>(args);
+            var result = parser.ParseArguments<EvaluateOptions, ImportFileDetailsOptions, ImportIssuesOptions, NewManifestOptions, NewFilterOptions, ExtractMetadataOptions>(args);
 
             var exitCode = result
                 .MapResult(
                     (EvaluateOptions x) => ProcessEvaluateAsync(x, container).GetAwaiter().GetResult(),
-                    (ExportDbOptions x) => ProcessExportDbAsync(x, container).GetAwaiter().GetResult(),
+                    (ImportIssuesOptions x) => ProcessImportIssuesAsync(x, container).GetAwaiter().GetResult(),
+                    (ImportFileDetailsOptions x) => ProcessImportFileDetailsAsync(x, container).GetAwaiter().GetResult(),
                     (NewManifestOptions x) => ProcessNewManifestAsync(x, container).GetAwaiter().GetResult(),
                     (NewFilterOptions x) => ProcessNewFilterAsync(x, container).GetAwaiter().GetResult(),
                     (ExtractMetadataOptions x) => ProcessExtractOptionsAsync(x, container).GetAwaiter().GetResult(),
                     _ => ProcessErrors(result));
 
             return exitCode;
+        }
+
+        private static Task<int> ProcessImportFileDetailsAsync(ImportFileDetailsOptions options, ServiceProvider container)
+        {
+            return container.GetRequiredService<IImportFileDetailsCommand>().ExecuteAsync(options);
+        }
+
+        private static Task<int> ProcessImportIssuesAsync(ImportIssuesOptions options, ServiceProvider container)
+        {
+            return container.GetRequiredService<IImportIssuesCommand>().ExecuteAsync(options);
         }
 
         private static Task<int> ProcessExtractOptionsAsync(ExtractMetadataOptions options, IServiceProvider container)
@@ -52,11 +63,6 @@ namespace GodelTech.CodeReview.Evaluator
         private static Task<int> ProcessNewManifestAsync(NewManifestOptions options, IServiceProvider container)
         {
             return container.GetRequiredService<ICreateNewManifestCommand>().ExecuteAsync(options);
-        }
-
-        private static Task<int> ProcessExportDbAsync(ExportDbOptions options, IServiceProvider container)
-        {
-            return container.GetRequiredService<IExportDbCommand>().ExecuteAsync(options);
         }
 
         private static Task<int> ProcessEvaluateAsync(EvaluateOptions options, IServiceProvider container)
@@ -88,7 +94,6 @@ namespace GodelTech.CodeReview.Evaluator
             });
 
             serviceProvider.AddSingleton<IFileService, FileService>();
-            serviceProvider.AddSingleton<IDirectoryService, DirectoryService>();
             serviceProvider.AddSingleton<IYamlSerializer, YamlSerializer>();
             serviceProvider.AddSingleton<IInitScriptProvider, InitScriptProvider>();
             serviceProvider.AddSingleton<IJsonSerializer, JsonSerializer>();
@@ -107,11 +112,12 @@ namespace GodelTech.CodeReview.Evaluator
             serviceProvider.AddTransient<IIssueFilterFactory, IssueFilterFactory>();
             serviceProvider.AddTransient<IEvaluationService, EvaluationService>();
             serviceProvider.AddTransient<IDatabaseService, DatabaseService>();
-            serviceProvider.AddTransient<IFileListResolver, FileListResolver>();
             serviceProvider.AddTransient<IIssueProvider, IssueProvider>();
+            
             serviceProvider.AddTransient<IExtractMetadataCommand, ExtractMetadataCommand>();
             serviceProvider.AddTransient<IEvaluateCommand, EvaluateCommand>();
-            serviceProvider.AddTransient<IExportDbCommand, ExportDbCommand>();
+            serviceProvider.AddTransient<IImportFileDetailsCommand, ImportFileDetailsCommand>();
+            serviceProvider.AddTransient<IImportIssuesCommand, ImportIssuesCommand>();
             serviceProvider.AddTransient<ICreateNewFilterCommand, CreateNewFilterCommand>();
             serviceProvider.AddTransient<ICreateNewManifestCommand, CreateNewManifestCommand>();
 

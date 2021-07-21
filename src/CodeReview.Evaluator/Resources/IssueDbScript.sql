@@ -1,16 +1,4 @@
-﻿CREATE TABLE "FileDetails" (
-	"Id"	INTEGER,
-	"FilePath"	TEXT NOT NULL,
-	"Language"	TEXT NOT NULL,
-	"Blank"		INTEGER,
-	"Code"		INTEGER,
-	"Commented"	INTEGER,
-
-	PRIMARY KEY("Id" AUTOINCREMENT)
-);
-
-
-CREATE TABLE "Issues" (
+﻿CREATE TABLE "Issues" (
 	"Id"	INTEGER,
 	"RuleId"	TEXT NOT NULL,
 	"Level"	TEXT NOT NULL,
@@ -19,7 +7,7 @@ CREATE TABLE "Issues" (
 	"Description"	TEXT,
 	"DetailsUrl"	TEXT,
 	"Category"	TEXT,
-	PRIMARY KEY("Id")
+	PRIMARY KEY("Id"  AUTOINCREMENT)
 );
 
 CREATE TABLE "IssueLocations" (
@@ -55,6 +43,18 @@ CREATE TABLE "IssueHashes" (
 			ON DELETE CASCADE
 );
 
+
+CREATE TABLE "IssueProperties" (
+	"Id"	    INTEGER,
+	"IssueId"	INTEGER,
+	"Property"	TEXT NOT NULL,
+	"Value" 	TEXT NOT NULL,
+	PRIMARY KEY("Id" AUTOINCREMENT),
+	FOREIGN KEY ("IssueId")
+		REFERENCES "Issues" ("Id") 
+			ON DELETE CASCADE
+);
+
 CREATE INDEX "IssueLocations_IssueId"
 	ON "IssueLocations" ("IssueId");
 
@@ -66,3 +66,6 @@ CREATE INDEX "IssueHashes_IssueId"
 
 CREATE INDEX "IssueHashes_Value_Algorithm"
 	ON "IssueHashes" ("Value", "Algorithm");
+
+CREATE INDEX "IssueProperties_Property"
+	ON "IssueProperties" ("Property");
