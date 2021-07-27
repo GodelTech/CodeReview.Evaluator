@@ -30,6 +30,9 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         public async Task<IEnumerable<Issue>> GetIssuesAsync(ImportIssuesOptions options)
         {
+            if (options == null) 
+                throw new ArgumentNullException(nameof(options));
+            
             var manifest = await _manifestProvider.GetScopeManifestAsync(options.FilterManifestPath);
 
             var allIssues = _issueProvider.ReadAllIssues(options.IssuesFilePath);
