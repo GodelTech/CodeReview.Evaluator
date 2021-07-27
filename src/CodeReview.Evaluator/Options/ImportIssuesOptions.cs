@@ -8,7 +8,7 @@ namespace GodelTech.CodeReview.Evaluator.Options
         [Option('i', "issues", Required = true, HelpText = "Issues file path.")]
         public string IssuesFilePath { get; set; }
 
-        [Option('f', "filter", Required = true, HelpText = "Filter file path.")]
+        [Option('f', "filter", Required = false, HelpText = "Filter file path.")]
         public string FilterManifestPath { get; set; }
 
         [Option('o', "output", Required = true, HelpText = "Output file path.")]
