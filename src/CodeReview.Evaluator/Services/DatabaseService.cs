@@ -339,7 +339,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             issueCommand.Parameters.AddWithValue("$ruleId", issue.RuleId);
             issueCommand.Parameters.AddWithValue("$level", issue.Level);
-            issueCommand.Parameters.AddWithValue("$title", issue.Title);
+            issueCommand.Parameters.AddWithValue("$title", (object)issue.Title ?? DBNull.Value);
             issueCommand.Parameters.AddWithValue("$message", issue.Message);
             issueCommand.Parameters.AddWithValue("$description", (object) issue.Description ?? DBNull.Value);
             issueCommand.Parameters.AddWithValue("$detailsUrl", (object) issue.DetailsUrl ?? DBNull.Value);
