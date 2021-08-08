@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using GodelTech.CodeReview.Evaluator.Models;
 using Microsoft.Data.Sqlite;
@@ -240,7 +241,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
         {
             var issueId = await SaveIssueAsync(connection, issue);
 
-            foreach (var location in issue.Locations ?? Array.Empty<IssueLocation>())
+            foreach (var location in (issue.Locations ?? Array.Empty<IssueLocation>()).Distinct())
             {
                 await SaveLocationAsync(connection, issueId, location);
             }
