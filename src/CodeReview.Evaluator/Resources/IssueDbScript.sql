@@ -26,6 +26,7 @@ CREATE TABLE "IssueTags" (
 	"Id"	INTEGER,
 	"IssueId"	INTEGER,
 	"Name"	TEXT NOT NULL,
+	UNIQUE("IssueId", "Name"),
 	PRIMARY KEY("Id" AUTOINCREMENT),
 	FOREIGN KEY ("IssueId")
 		REFERENCES "Issues" ("Id") 
@@ -37,6 +38,7 @@ CREATE TABLE "IssueHashes" (
 	"IssueId"	INTEGER,
 	"Algorithm"	TEXT NOT NULL,
 	"Value" 	TEXT NOT NULL,
+	UNIQUE("IssueId","Algorithm"),
 	PRIMARY KEY("Id" AUTOINCREMENT),
 	FOREIGN KEY ("IssueId")
 		REFERENCES "Issues" ("Id") 
@@ -49,6 +51,7 @@ CREATE TABLE "IssueProperties" (
 	"IssueId"	INTEGER,
 	"Property"	TEXT NOT NULL,
 	"Value" 	TEXT NOT NULL,
+	UNIQUE("IssueId","Property"),
 	PRIMARY KEY("Id" AUTOINCREMENT),
 	FOREIGN KEY ("IssueId")
 		REFERENCES "Issues" ("Id") 
