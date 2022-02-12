@@ -11,6 +11,9 @@
     "CodeReview.Evaluator - Evaluate": {
       "commandName": "Project",
       "commandLineArgs": "evaluate -o result.json -m ../../../../../docs/manifests/manifest.yaml -d ../../../../../docs/data/data.db"
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }

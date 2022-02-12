@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeReview.Evaluator", "src\CodeReview.Evaluator\CodeReview.Evaluator.csproj", "{E297967E-0435-4A13-A62B-608753C83F8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReview.Evaluator.Tests", "test\CodeReview.Evaluator.Tests\CodeReview.Evaluator.Tests.csproj", "{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeReview.Evaluator.Tests", "test\CodeReview.Evaluator.Tests\CodeReview.Evaluator.Tests.csproj", "{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeReview.Evaluator.IntegrationTests", "test\CodeReview.Evaluator.IntegrationTests\CodeReview.Evaluator.IntegrationTests.csproj", "{58171FA3-42D2-4DE6-A81C-1FA722F9FB03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7D6DB39-E047-41EA-A8ED-5E96BC6AE5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58171FA3-42D2-4DE6-A81C-1FA722F9FB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58171FA3-42D2-4DE6-A81C-1FA722F9FB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58171FA3-42D2-4DE6-A81C-1FA722F9FB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58171FA3-42D2-4DE6-A81C-1FA722F9FB03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
