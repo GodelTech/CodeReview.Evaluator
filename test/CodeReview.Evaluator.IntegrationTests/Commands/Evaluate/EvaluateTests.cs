@@ -38,5 +38,16 @@ namespace CodeReview.Evaluator.IntegrationTests.Commands.Evaluate
                     .Expects<EvaluationResult>(x => x.WithOutputFromResources())
                 .Run();
         }
+
+        [Fact]
+        public void When_ScalarResultIsMappedToRange_Should_ReturnExpectedJson()
+        {
+            Scenario.New()
+                .When()
+                    .Performs<Actions.Evaluate>(x => x.WithManifestFromResources())
+                .Then()
+                    .Expects<EvaluationResult>(x => x.WithOutputFromResources())
+                .Run();
+        }
     }
 }
