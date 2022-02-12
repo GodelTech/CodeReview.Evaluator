@@ -18,6 +18,17 @@ namespace CodeReview.Evaluator.IntegrationTests.Commands.Evaluate
         }
 
         [Fact]
+        public void When_ObjectResultIntResult_Should_ReturnExpectedJson()
+        {
+            Scenario.New()
+                .When()
+                    .Performs<Actions.Evaluate>(x => x.WithManifestFromResources())
+                .Then()
+                    .Expects<EvaluationResult>(x => x.WithOutputFromResources())
+                .Run();
+        }
+
+        [Fact]
         public void When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson()
         {
             Scenario.New()
