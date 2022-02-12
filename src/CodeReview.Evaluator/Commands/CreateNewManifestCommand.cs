@@ -54,8 +54,8 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                             {
                                 Value = "123",
                                 IsValueRef = true,
-                                IsInt = false,
-                                IsNull = false
+                                IsInt = true,
+                                IsNull = true
                             }
                         }
                     },
