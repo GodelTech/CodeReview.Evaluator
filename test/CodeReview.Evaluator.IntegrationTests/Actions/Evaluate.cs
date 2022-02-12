@@ -10,9 +10,9 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
 
         private string _manifestResourceName;
 
-        public Evaluate WithManifestFromResources()
+        public Evaluate WithManifestFromResources(string suffix = ".manifest.")
         {
-            _manifestResourceName = ResourceNameResolver.FindResultResourceNameByMethod();
+            _manifestResourceName = ResourceNameResolver.FindResultResourceNameByMethod(suffix);
 
             return this;
         }

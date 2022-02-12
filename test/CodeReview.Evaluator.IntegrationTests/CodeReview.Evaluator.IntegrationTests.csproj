@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <PackageReference Include="FluentAssertions" Version="6.5.1" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Resources\issues.db" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Resources\issues.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="FluentAssertions" Version="6.5.1" />
 	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="StoryLine" Version="1.7.0" />
     <PackageReference Include="StoryLine.Utils" Version="1.3.0" />
@@ -28,12 +36,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\CodeReview.Evaluator\CodeReview.Evaluator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
