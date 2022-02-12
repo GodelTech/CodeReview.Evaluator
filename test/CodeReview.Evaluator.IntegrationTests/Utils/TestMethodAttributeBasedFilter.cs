@@ -17,8 +17,6 @@ namespace CodeReview.Evaluator.IntegrationTests.Utils
 
         public bool IsMatch(StackFrame details)
         {
-            var type = details.GetType();
-
             var method = details.GetMethod();
             if (method == null)
                 return false;
