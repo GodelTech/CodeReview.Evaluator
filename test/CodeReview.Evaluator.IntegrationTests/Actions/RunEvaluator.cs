@@ -9,7 +9,7 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
         private string _commandName;
         private readonly Dictionary<string, string> _parameterToValueMap = new();
 
-        public IActionBuilder WithCommand(string commandName)
+        public RunEvaluator WithCommand(string commandName)
         {
             if (string.IsNullOrWhiteSpace(commandName))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(commandName));
@@ -19,7 +19,7 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
             return this;
         }
 
-        public IActionBuilder WithParameter(string paramName, string value)
+        public RunEvaluator WithParameter(string paramName, string value)
         {
             if (string.IsNullOrWhiteSpace(paramName))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(paramName));

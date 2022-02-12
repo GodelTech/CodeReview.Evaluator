@@ -3,14 +3,14 @@ using StoryLine.Contracts;
 
 namespace CodeReview.Evaluator.IntegrationTests.Actions
 {
-    public class RunEvaluate : IActionBuilder
+    public class Evaluate : IActionBuilder
     {
         private static readonly ResourceNameResolver ResourceNameResolver = new();
         private static readonly string SqliteDatabaseResourceName = ResourceNameResolver.FindResourceInResourceFolder("issues.db");
 
         private string _manifestResourceName;
 
-        public IActionBuilder WithManifestFromResources()
+        public Evaluate WithManifestFromResources()
         {
             _manifestResourceName = ResourceNameResolver.FindResultResourceNameByMethod();
 
@@ -19,7 +19,7 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
 
         public IAction Build()
         {
-            return new RunEvaluateAction(
+            return new EvaluateAction(
                 SqliteDatabaseResourceName,
                 _manifestResourceName);
         }

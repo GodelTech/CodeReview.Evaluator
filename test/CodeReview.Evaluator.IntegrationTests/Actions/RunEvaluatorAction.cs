@@ -1,4 +1,5 @@
 ﻿using System;
+using CodeReview.Evaluator.IntegrationTests.Actions.Artifacts;
 using GodelTech.CodeReview.Evaluator;
 using StoryLine.Contracts;
 
