@@ -7,14 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.manifest.yaml" />
-    <None Remove="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.output.json" />
     <None Remove="Resources\issues.db" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.manifest.yaml" />
-    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ManifestContainsScalarValue_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.output.json" />
     <EmbeddedResource Include="Resources\issues.db" />
   </ItemGroup>
 
