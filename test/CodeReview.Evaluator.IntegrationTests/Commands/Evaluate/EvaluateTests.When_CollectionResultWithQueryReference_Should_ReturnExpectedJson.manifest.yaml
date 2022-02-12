@@ -1,0 +1,9 @@
+queries:
+  issueByCategory:
+    query: SELECT * FROM Issues WHERE Category = $Category ORDER BY Id LIMIT 5
+requests:
+  redundanciesInCode:
+    queryRef: issueByCategory
+    type: Collection
+    parameters:
+      Category: Redundancies in Code

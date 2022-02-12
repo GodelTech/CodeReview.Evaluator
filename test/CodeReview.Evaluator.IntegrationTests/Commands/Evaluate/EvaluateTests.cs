@@ -49,5 +49,27 @@ namespace CodeReview.Evaluator.IntegrationTests.Commands.Evaluate
                     .Expects<EvaluationResult>(x => x.WithOutputFromResources())
                 .Run();
         }
+
+        [Fact]
+        public void When_ScalarResultWithParametrizedQuery_Should_ReturnExpectedJson()
+        {
+            Scenario.New()
+                .When()
+                    .Performs<Actions.Evaluate>(x => x.WithManifestFromResources())
+                .Then()
+                    .Expects<EvaluationResult>(x => x.WithOutputFromResources())
+                .Run();
+        }
+
+        [Fact]
+        public void When_CollectionResultWithQueryReference_Should_ReturnExpectedJson()
+        {
+            Scenario.New()
+                .When()
+                    .Performs<Actions.Evaluate>(x => x.WithManifestFromResources())
+                .Then()
+                    .Expects<EvaluationResult>(x => x.WithOutputFromResources())
+                .Run();
+        }
     }
 }
