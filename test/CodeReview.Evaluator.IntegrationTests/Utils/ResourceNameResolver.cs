@@ -12,7 +12,7 @@ namespace CodeReview.Evaluator.IntegrationTests.Utils
 
         public string FindResourceInResourceFolder(string relativeName)
         {
-            var expectedResourceName = "CodeReview.Evaluator.IntegrationTests.Resources" + relativeName;
+            var expectedResourceName = "CodeReview.Evaluator.IntegrationTests.Resources." + relativeName;
 
             return AssemblyResourceNames.TryGetValue(expectedResourceName, out var actualResourceName) ?
                 actualResourceName :
@@ -34,9 +34,10 @@ namespace CodeReview.Evaluator.IntegrationTests.Utils
 
         private static string GetResourceName(StackFrame frame, string suffix)
         {
-            var typeName = frame.GetType().FullName + "." + frame.GetMethod()?.Name;
+            var methodInfo = frame.GetMethod();
+            var resourceName = methodInfo?.DeclaringType?.FullName + "." + frame.GetMethod()?.Name;
 
-            var matchingResource = AssemblyResourceNames.FirstOrDefault(x => x.Equals(typeName + suffix, StringComparison.InvariantCultureIgnoreCase));
+            var matchingResource = AssemblyResourceNames.FirstOrDefault(x => x.StartsWith(resourceName + suffix, StringComparison.InvariantCultureIgnoreCase));
 
             return !string.IsNullOrEmpty(matchingResource) ? 
                 matchingResource : 
