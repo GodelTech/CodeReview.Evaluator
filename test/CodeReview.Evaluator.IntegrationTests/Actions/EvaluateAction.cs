@@ -43,9 +43,9 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
                 .When()
                     .Performs<RunEvaluator>(x => x
                         .WithCommand("evaluate")
-                        .WithParameter("d", sqliteDbFile.FilePath)
-                        .WithParameter("m", manifestFile.FilePath)
-                        .WithParameter("o", outputFile.FilePath)
+                        .WithParameter("-d", sqliteDbFile.FilePath)
+                        .WithParameter("-m", manifestFile.FilePath)
+                        .WithParameter("-o", outputFile.FilePath)
                         )
                 .Then()
                     .Expects<Artifact<ExecutionResult>>(x => x

@@ -33,7 +33,7 @@ namespace CodeReview.Evaluator.IntegrationTests.Actions
             {
                 return Program.Main(_args);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return int.MinValue;
             }
