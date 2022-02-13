@@ -28,18 +28,18 @@ namespace GodelTech.CodeReview.Evaluator.Commands
                 {
                     ["query1"] = new()
                     {
-                        Query = "SELECT * FROM Issues WHERE RuleId = @RuleId"
+                        Query = "SELECT * FROM Issues WHERE RuleId = $RuleId"
                     },
                     ["query2"] = new()
                     {
-                        Query = "SELECT COUNT(*) FROM Issues WHERE Category = @Category"
+                        Query = "SELECT COUNT(*) FROM Issues WHERE Category = $Category"
                     }
                 },
                 Requests = new()
                 {
                     ["inlineQuery"] = new()
                     {
-                        Query = "SELECT COUNT(*) FROM Issues WHERE Id = @IssueId",
+                        Query = "SELECT COUNT(*) FROM Issues WHERE Id = $IssueId",
                         Type = RequestType.Scalar,
                         AddToOutput = true,
                         Ranges = new()
