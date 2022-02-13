@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.output.json" />
     <None Remove="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.manifest.yaml" />
     <None Remove="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.output.json" />
     <None Remove="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.manifest.yaml" />
@@ -29,6 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.output.json" />
     <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.manifest.yaml" />
     <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.output.json" />
     <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson.manifest.yaml" />
