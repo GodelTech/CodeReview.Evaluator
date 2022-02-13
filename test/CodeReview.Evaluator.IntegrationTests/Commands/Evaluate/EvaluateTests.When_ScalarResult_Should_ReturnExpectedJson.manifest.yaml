@@ -1,0 +1,4 @@
+requests:
+  issueCountByCategory:
+    query: SELECT Category, COUNT(*) AS IssueCount FROM Issues GROUP BY Category
+    type: Collection

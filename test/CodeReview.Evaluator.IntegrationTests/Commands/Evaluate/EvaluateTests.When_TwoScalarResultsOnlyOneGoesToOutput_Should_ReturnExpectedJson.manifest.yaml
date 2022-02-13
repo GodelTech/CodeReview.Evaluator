@@ -1,0 +1,10 @@
+requests:
+  sharpFilesSize:
+    query: select sum(code) from FileDetails where Language = $Category
+    parameters:
+      Category: C#
+  jsFilestSize:
+    query: select sum(code) from FileDetails where Language = $Category
+    addToOutput: false
+    parameters:
+      Category: CJavaScript

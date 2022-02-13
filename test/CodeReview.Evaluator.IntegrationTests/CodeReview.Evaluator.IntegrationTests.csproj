@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ObjectResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ObjectResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultIsMappedToRange_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultIsMappedToRange_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultWithParametrizedQuery_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResultWithParametrizedQuery_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_TwoScalarResultsOnlyOneGoesToOutput_Should_ReturnExpectedJson.manifest.yaml" />
+    <None Remove="Commands\Evaluate\EvaluateTests.When_TwoScalarResultsOnlyOneGoesToOutput_Should_ReturnExpectedJson.output.json" />
+    <None Remove="Resources\issues.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_AllQueryTypes_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResultIntResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultReferenceToQueryResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_TwoScalarResultsOnlyOneGoesToOutput_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_TwoScalarResultsOnlyOneGoesToOutput_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_CollectionResultWithQueryReference_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultWithParametrizedQuery_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultWithParametrizedQuery_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultIsMappedToRange_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResultIsMappedToRange_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ObjectResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_QueryResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.manifest.yaml" />
+    <EmbeddedResource Include="Commands\Evaluate\EvaluateTests.When_ScalarResult_Should_ReturnExpectedJson.output.json" />
+    <EmbeddedResource Include="Resources\issues.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="FluentAssertions" Version="6.5.1" />
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="StoryLine" Version="1.7.0" />
+    <PackageReference Include="StoryLine.Utils" Version="1.3.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.1.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodeReview.Evaluator\CodeReview.Evaluator.csproj" />
+  </ItemGroup>
+
+</Project>

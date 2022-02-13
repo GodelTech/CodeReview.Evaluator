@@ -31,6 +31,7 @@ namespace GodelTech.CodeReview.Evaluator.Models
                 Value = values.Value;
                 IsInt = values.IsInt;
                 IsNull = values.IsNull;
+                IsValueRef = values.IsValueRef;
             }
         }
 
@@ -46,7 +47,8 @@ namespace GodelTech.CodeReview.Evaluator.Models
                 {
                     Value = Value, 
                     IsInt = IsInt, 
-                    IsNull = IsNull
+                    IsNull = IsNull,
+                    IsValueRef = IsValueRef
                 });
             }
         }

@@ -20,8 +20,8 @@ namespace CodeReview.Evaluator.Tests.Models
         {
             var range = new ValueRange
             {
-                Start = start.HasValue ? (decimal)start.Value : null,
-                End = end.HasValue ? (decimal)end.Value : null
+                Start = start.HasValue ? start.Value : null,
+                End = end.HasValue ? end.Value : null
             };
 
             range.IsInRange(value).Should().Be(expectedResult);

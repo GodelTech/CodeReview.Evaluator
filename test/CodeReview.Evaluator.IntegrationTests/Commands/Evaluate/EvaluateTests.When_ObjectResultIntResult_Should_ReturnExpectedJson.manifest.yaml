@@ -1,0 +1,8 @@
+requests:
+  topIssue:
+    query: SELECT * FROM Issues WHERE Id = $Id
+    type: Object
+    parameters:
+      Id:
+        value: 2
+        isInt: true

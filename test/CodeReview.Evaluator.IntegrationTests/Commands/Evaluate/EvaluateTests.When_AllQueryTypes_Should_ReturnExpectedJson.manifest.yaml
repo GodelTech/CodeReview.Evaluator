@@ -1,0 +1,36 @@
+queries:
+  issueByCategory:
+    query: SELECT * FROM Issues WHERE Category = $Category LIMIT (5)
+requests:
+  totalIssueCount:
+    query: SELECT COUNT(*) FROM Issues
+    type: Scalar
+  redundanciesInCode:
+    queryRef: issueByCategory
+    type: Collection
+    parameters:
+      Category: Redundancies in Code
+  topIssue:
+    query: SELECT * FROM Issues LIMIT (1)
+    type: Object
+  issueCountByCategory:
+    query: SELECT Category, COUNT(*) AS IssueCount FROM Issues GROUP BY Category
+    type: Collection
+  projectSize:
+    query: SELECT SUM(code) FROM FileDetails WHERE Language = $Category
+    parameters:
+      Category: C#
+    ranges:
+      XS:
+        end: 1000
+      S:
+        start: 1000
+        end: 10000
+      M:
+        start: 10000
+        end: 100000
+      L:
+        start: 100000
+        end: 500000
+      XL:
+        start: 500000

@@ -429,7 +429,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
         private static string BuildConnectionString(string filePath)
         {
-            return "Data Source=" + filePath;
+            return "Data Source=" + filePath + "; Pooling=False;";
         }
 
         #endregion

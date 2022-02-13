@@ -14,9 +14,9 @@ using Microsoft.Extensions.Logging;
 namespace GodelTech.CodeReview.Evaluator
 {
     // 1. Add manifest and filter validators
-    class Program
+    public class Program
     {
-        private static int Main(string[] args)
+        public static int Main(string[] args)
         {
             using var container = CreateServiceProvider();
 

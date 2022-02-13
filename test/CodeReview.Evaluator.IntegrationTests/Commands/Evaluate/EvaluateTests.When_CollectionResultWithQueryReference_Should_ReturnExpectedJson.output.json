@@ -1,0 +1,44 @@
+{
+  "redundanciesInCode": [
+    {
+      "id": 3,
+      "ruleId": "RedundantUsingDirective",
+      "level": "Warning",
+      "title": "Redundancies in Code",
+      "message": "Using directive is not required by the code and can be safely removed",
+      "description": "Redundant using directive",
+      "detailsUrl": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantUsingDirective",
+      "category": "Redundancies in Code"
+    },
+    {
+      "id": 5,
+      "ruleId": "RedundantUsingDirective",
+      "level": "Warning",
+      "title": "Redundancies in Code",
+      "message": "Using directive is not required by the code and can be safely removed",
+      "description": "Redundant using directive",
+      "detailsUrl": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantUsingDirective",
+      "category": "Redundancies in Code"
+    },
+    {
+      "id": 7,
+      "ruleId": "RedundantUsingDirective",
+      "level": "Warning",
+      "title": "Redundancies in Code",
+      "message": "Using directive is not required by the code and can be safely removed",
+      "description": "Redundant using directive",
+      "detailsUrl": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantUsingDirective",
+      "category": "Redundancies in Code"
+    },
+    {
+      "id": 9,
+      "ruleId": "RedundantUsingDirective",
+      "level": "Warning",
+      "title": "Redundancies in Code",
+      "message": "Using directive is not required by the code and can be safely removed",
+      "description": "Redundant using directive",
+      "detailsUrl": "https://www.jetbrains.com/resharperplatform/help?Keyword=RedundantUsingDirective",
+      "category": "Redundancies in Code"
+    }
+  ]
+}
