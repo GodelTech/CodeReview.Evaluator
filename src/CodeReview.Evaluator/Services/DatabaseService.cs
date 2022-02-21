@@ -155,7 +155,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
 
             await using var reader = await command.ExecuteReaderAsync();
 
-            if (!reader.Read())
+            if (!reader.HasRows)
                 return null;
 
             var schema = reader.GetSchemaTable();
