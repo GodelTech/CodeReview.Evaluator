@@ -256,7 +256,7 @@ namespace GodelTech.CodeReview.Evaluator.Services
                 await SaveHashAsync(connection, issueId, hash.Key, hash.Value);
             }
 
-            foreach (var property in issue.Hashes ?? EmptyDictionary)
+            foreach (var property in issue.Properties ?? EmptyDictionary)
             {
                 await SavePropertyAsync(connection, issueId, property.Key, property.Value);
             }
