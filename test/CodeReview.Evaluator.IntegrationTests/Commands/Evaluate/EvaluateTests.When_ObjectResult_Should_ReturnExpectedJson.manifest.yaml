@@ -1,4 +1,0 @@
-requests:
-  topIssue:
-    query: SELECT * FROM Issues ORDER BY Id LIMIT 1
-    type: Object

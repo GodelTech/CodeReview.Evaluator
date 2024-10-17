@@ -1,5 +1,0 @@
-requests:
-  projectSize:
-    query: select sum(code) from FileDetails where Language = $Category
-    parameters:
-      Category: C#

@@ -1,4 +1,0 @@
-requests:
-  totalIssueCount:
-    query: SELECT COUNT(*) FROM Issues
-    type: Scalar
