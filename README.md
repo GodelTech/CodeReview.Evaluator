@@ -1,6 +1,6 @@
 # CodeReview.Evaluator
 
-NuGet: https://hub.docker.com/r/godeltech/codereview.evaluator
+Docker image: https://hub.docker.com/r/godeltech/codereview.evaluator
 
 ## Description
 
