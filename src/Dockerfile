@@ -7,7 +7,7 @@ RUN dotnet restore "CodeReview.Evaluator/CodeReview.Evaluator.csproj" --force
 COPY CodeReview.Evaluator/. ./CodeReview.Evaluator/
 RUN dotnet publish ./CodeReview.Evaluator/CodeReview.Evaluator.csproj -c Release -o ./CodeReview.Evaluator/out
 
-FROM mcr.microsoft.com/dotnet/runtime:5.0 AS runtime
+FROM mcr.microsoft.com/dotnet/runtime:9.0 AS runtime
 
 WORKDIR /app
 COPY --from=build /app/CodeReview.Evaluator/out .
